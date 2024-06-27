@@ -12,7 +12,7 @@ Boa sorte!
 
 # Como começar?
 
-1. Faça o fork do projeto `https://github.com/`
+1. Faça o fork do projeto `https://github.com/christiansaddock/Fretefy_QA_Engineer`
 2. Faça sua implementação
 3. Suba seu código no fork criado
 4. Nos avise sobre a finalização da implementação, preferencialmente por email: christian.saddock@fretefy.com.br 🚀
