@@ -1,4 +1,4 @@
-# Fretefy | FullStack
+# Fretefy | QA Engineer
 
 Bem vindo,
 
@@ -24,6 +24,7 @@ Implementar um teste automatizado na camada de interface a seu critério. O proj
 
 ### Requisitos
 - Crie um novo teste;
+- O teste deve ter estrutura semelhante ao teste exemplo;
 - O teste deve ter uma ação e um Assert pelo menos;
 
 ## Observações
