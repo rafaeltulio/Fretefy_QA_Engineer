@@ -1,0 +1,66 @@
+-> Loading plugin D:\ffy-e2e\Fretefy_ATDD\bin\Debug\TechTalk.SpecFlow.MSTest.SpecFlowPlugin.dll
+-> Using default config
+Dado o módulo "Formação de carga"
+-> done: ATDDFretefyBasicSteps.DadoOModulo("Formação de carga") (2,8s)
+Quando selecionado o filtro de data pelo período de "Tudo" em pré-condição
+-> done: ATDDFretefyBasicSteps.WhenSelecionadoOFiltroDeDataPeloPeriodoDeEmPre_Condicao("Tudo") (6,2s)
+Dado que há uma tabela de frete Lotação controlado por Região e Volume
+-> done: ATDDFretefyConfigTabelaFreteSteps.DadoQueHaUmaTabelaDeFreteLotacaoControladoPorRegiaoEVolume() (0,2s)
+E que há uma tabela de frete Lotação controlado por Região e Veículo
+-> done: ATDDFretefyConfigTabelaFreteSteps.DadoQueHaUmaTabelaDeFreteLotacaoControladoPorRegiaoEVeiculo() (0,2s)
+E a configuração da geração de carga como "Tabela de frete"
+-> done: ATDDFretefyFormacaoSteps.DadoAConfiguracaoDaGeracaoDeCargaComo("Tabela de frete") (0,2s)
+E que há pedidos cadastrados
+-> done: ATDDFretefyFormacaoSteps.DadoQueHaPedidosCadastrados() (0,5s)
+E uma minuta "Formar carga BDD - Lotação" com os pedidos
+  --- table step argument ---
+  | Documento     |
+  | 09071984A01TF |
+  | 09071984A03TF |
+-> done: ATDDFretefyFormacaoSteps.DadoUmaMinutaComOsPedidos("Formar carga BDD ...", <table>) (27,8s)
+Quando selecionar o conjunto de veículo "Truck Baú"
+-> done: ATDDFretefyFormacaoSteps.QuandoSelecionarOConjuntoDeVeiculo("Truck Baú") (3,7s)
+E selecionar o tipo de transporte "Lotação"
+-> done: ATDDFretefyFormacaoSteps.QuandoSelecionarOTipoDeTransporte("Lotação") (0,6s)
+Então deve ser apresentadas as tabelas de frete
+  --- table step argument ---
+  | transportadora                          | nome da tabela                          | SLA     | Valor total |
+  | RegressionFy Transportadora Ltda        | Lotação controlado por Região e Volume  | SLA 36h | R$ 1.594,98 |
+  | RegressionFy Transportadora filial Ltda | Lotação controlado por Região e Volume  | SLA 36h | R$ 1.594,98 |
+  | RegressionFy Transportadora Ltda        | Lotação controlado por Região e Veículo | SLA 24h | R$ 1.968,75 |
+  | RegressionFy Transportadora filial Ltda | Lotação controlado por Região e Veículo | SLA 24h | R$ 1.968,75 |
+-> done: ATDDFretefyFormacaoSteps.EntaoDeveSerApresentadasAsTabelasDeFrete(<table>) (4,2s)
+E deve haver a memória de cálculo para a transportadora "RegressionFy Transportadora Ltda" com tabela "Lotação controlado por Região e Volume"
+  --- table step argument ---
+  | Componente            | Valor       | Cálculo                                                                    |
+  | Taxa de frete         | R$ 150,00   | 150,00                                                                     |
+  | Adicional por Volume  | R$ 1.100,00 | 100,00 * ceiling(10,50 / 1,00)                                             |
+  | Diária de permanência | R$ 90,00    | 90,00                                                                      |
+  | GRIS                  | R$ 106,73   | 41.050,00 * (IF(RJ = "RJ"; 0,26; IF(41.050,00 < 10000; 0,10; 0,23)) / 100) |
+  | Taxa de Coleta        | R$ 16,50    | 16,50                                                                      |
+  | Taxa de Entrega       | R$ 16,50    | 16,50                                                                      |
+  | Frete valor           | R$ 205,25   | 41.050,00 * (0,50 / 100)                                                   |
+-> done: ATDDFretefyFormacaoSteps.EntaoDeveHaverAMemoriaDeCalculoParaATransportadoraComTabela("RegressionFy Tran...", "Lotação controlad...", <table>) (13,3s)
+E deve haver a memória de cálculo para a transportadora "RegressionFy Transportadora filial Ltda" com tabela "Lotação controlado por Região e Volume"
+  --- table step argument ---
+  | Componente            | Valor       | Cálculo                                                                    |
+  | Taxa de frete         | R$ 150,00   | 150,00                                                                     |
+  | Adicional por Volume  | R$ 1.100,00 | 100,00 * ceiling(10,50 / 1,00)                                             |
+  | Diária de permanência | R$ 90,00    | 90,00                                                                      |
+  | GRIS                  | R$ 106,73   | 41.050,00 * (IF(RJ = "RJ"; 0,26; IF(41.050,00 < 10000; 0,10; 0,23)) / 100) |
+  | Taxa de Coleta        | R$ 16,50    | 16,50                                                                      |
+  | Taxa de Entrega       | R$ 16,50    | 16,50                                                                      |
+  | Frete valor           | R$ 205,25   | 41.050,00 * (0,50 / 100)                                                   |
+-> done: ATDDFretefyFormacaoSteps.EntaoDeveHaverAMemoriaDeCalculoParaATransportadoraComTabela("RegressionFy Tran...", "Lotação controlad...", <table>) (12,3s)
+E deve haver a memória de cálculo para a transportadora "RegressionFy Transportadora Ltda" com tabela "Lotação controlado por Região e Veículo"
+  --- table step argument ---
+  | Componente                     | Valor       | Cálculo                  |
+  | Taxa de frete                  | R$ 1.575,00 | 1.575,00                 |
+  | adicional de coleta fora de sp | R$ 393,75   | 1.575,00 * (25,00 / 100) |
+-> done: ATDDFretefyFormacaoSteps.EntaoDeveHaverAMemoriaDeCalculoParaATransportadoraComTabela("RegressionFy Tran...", "Lotação controlad...", <table>) (3,2s)
+E deve haver a memória de cálculo para a transportadora "RegressionFy Transportadora filial Ltda" com tabela "Lotação controlado por Região e Veículo"
+  --- table step argument ---
+  | Componente                     | Valor       | Cálculo                  |
+  | Taxa de frete                  | R$ 1.575,00 | 1.575,00                 |
+  | adicional de coleta fora de sp | R$ 393,75   | 1.575,00 * (25,00 / 100) |
+-> done: ATDDFretefyFormacaoSteps.EntaoDeveHaverAMemoriaDeCalculoParaATransportadoraComTabela("RegressionFy Tran...", "Lotação controlad...", <table>) (3,0s)

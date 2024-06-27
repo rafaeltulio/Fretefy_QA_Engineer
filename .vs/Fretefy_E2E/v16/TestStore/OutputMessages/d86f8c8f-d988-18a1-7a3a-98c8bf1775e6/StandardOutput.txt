@@ -1,0 +1,83 @@
+Dado a importação de pedidos
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidos() (1,8s)
+E a rotina "Formação de carga|Formar cargas"
+-> done: NavigateSteps.DadoARotina("Formação de carga...") (4,3s)
+Quando selecionado o tipo de visualização "Simples"
+-> done: FretefyFormacaoSteps.QuandoSelecionadoOTipoDeVisualizacao("Simples") (4,4s)
+Quando atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado que há uma tabela de frete Lotação controlado por Região e Volume
+-> done: FretefyConfigTabelaDeFreteSteps.DadoQueHaUmaTabelaDeFreteLotacaoControladoPorRegiaoEVolume() (2,4s)
+E que há uma tabela de frete Lotação controlado por Região e Veículo
+-> done: FretefyConfigTabelaDeFreteSteps.DadoQueHaUmaTabelaDeFreteLotacaoControladoPorRegiaoEVeiculo() (0,2s)
+E a configuração da geração de carga como "Tabela de frete"
+-> done: FretefyFormacaoSteps.DadoAConfiguracaoDaGeracaoDeCargaComo("Tabela de frete") (0,0s)
+E que há pedidos cadastrados
+-> done: FretefyFormacaoSteps.DadoQueHaPedidosCadastrados() (0,5s)
+E uma minuta "Formar carga BDD - Lotação" com os pedidos
+  --- table step argument ---
+  | Documento     |
+  | 09071984A01TF |
+  | 09071984A03TF |
+-> done: FretefyFormacaoSteps.DadoUmaMinutaComOsPedidos("Formar carga BDD ...", <table>) (27,4s)
+Quando selecionar o conjunto de veículo "Truck Baú"
+-> done: FretefyFormacaoSteps.QuandoSelecionarOConjuntoDeVeiculo("Truck Baú") (4,3s)
+E selecionar o tipo de transporte "Lotação"
+-> done: FretefyFormacaoSteps.QuandoSelecionarOTipoDeTransporte("Lotação") (0,6s)
+E selecionar a transportadora "BDD Transportadora Ltda" e a tabela "Lotação controlado por Região e Veículo"
+-> done: FretefyFormacaoSteps.QuandoSelecionarATransportadoraEATabela("BDD Transportador...", "Lotação controlad...") (1,0s)
+Quando acionar o botão "Formar carga"
+-> done: ActionSteps.QuandoAcionadoOBotao("Formar carga") (1,1s)
+Então deve abrir o drawer "Cargas formadas"
+-> done: ValueSteps.EntaoDeveAbrirODrawer("Cargas formadas") (5,6s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+Então devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento    | DhColeta            | DhEntrega           | CubagemTotal | MinutaId                                                               | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade  | DestinoLatitude | DestinoLocalidade          | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                          | OrigemLongitude | OrigemNomeEmpresa           | OrigemUF | DestinoEmpresaId | OrdenacaoMinuta | Observacoes | Agrupador | PedidoOrigemId | TipoLote | UnidadeNegocioId  | Ativo | LoteDistribuido |
+  | [obtem ownerId] | 09071984A01TF | 02/11/2030 03:00:00 | 02/11/2030 03:00:00 | 3,500000     | (select Id from minuta where Descricao = 'Formar carga BDD - Lotação') | 1562,000  | 1          | D95F43C4-8B4D-4904-9A32-C497F4BAE02B | 15050,00    | Rio de Janeiro | -22,90685       | Rio de Janeiro, RJ, Brasil | -43,1729         |                    | RJ        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898       | Empresa padrão para pedidos | PR       |                  | 1               |             |           |                | false    | [obtem unidadeid] | true  | false           |
+  | [obtem ownerId] | 09071984A03TF | 03/11/2030 20:54:00 | 03/11/2030 20:54:00 | 7,000000     | (select Id from minuta where Descricao = 'Formar carga BDD - Lotação') | 2800,000  | 36         | 287C7DA9-1ED8-4B69-9E9C-B3B97F3C35C1 | 26000,00    | Rio de Janeiro | -22,90685       | Rio de Janeiro, RJ, Brasil | -43,1729         |                    | RJ        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898       | Empresa padrão para pedidos | PR       |                  | 2               |             |           |                | false    | [obtem unidadeid] | true  | false           |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (2,9s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | Situacao | VeiculoConjuntoId                                              | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao                  | UnidadeNegocioId  | Modalidade | TabelaFreteValor |
+  | [obtem ownerId] | 2        | (select Id from VeiculoConjunto where Descricao = 'Truck Baú') | 4362,00   | 10,50        | 41050,00   | 18,00           | 31,00        | Formar carga BDD - Lotação | [obtem unidadeid] | 1          | 1968,75          |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,3s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                                           | Codigo | Descricao | Cubagem | Peso | Quantidade | TipoAcondicionamentoId |
+  | select Id from PedidoItem where PedidoId in (select Id from pedido where ownerId = [obtem ownerId]) |        |           |         |      |            |                        |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (6,2s)
+Dado a conexão "fretefy" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("fretefy") (0,0s)
+Então os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCarga"
+  --- table step argument ---
+  | *Id                                                                                                 | Situacao | Visibilidade | DhColeta | DhEntrega | MotivoDesativacaoId | DhCancelamento | DhDesativacao | DhFinalizacao | CustoEstimado | UnidadeNegocioId                                            | CaracteristicaId | DistribuicaoAutomatica | PipeManualId | Origem |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga BDD - Lotação') | 1        | 2            |          |           |                     |                |               |               |               | (select Id from UnidadesNegocio where Descricao = 'Padrão') |                  | false                  |              | 4      |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCarga", <table>) (0,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaCarga"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                      | Modalidade | Peso     | Volume    | UnidadeVolume | TipoCargaId                                           | TipoNaturezaCargaId | CodIdentificador           | AcondicionamentoQtd | ValorCarga |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga BDD - Lotação') | 1          | 4362,000 | 10,500000 | 7             | (select Id from Tipos where Descricao = 'Palete PBR') |                     | Formar carga BDD - Lotação | 37                  | 41050,00   |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaCarga", <table>) (0,3s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaVeiculo"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                      | TipoPessoa | ApenasCavaloMecanico |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga BDD - Lotação') | 0          | false                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaVeiculo", <table>) (0,0s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaRota"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                      | *Ordem | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUF | LocalidadeLocalidade                                      | LocalidadeGooglePlaceId | Rota | DhInicio            | DhFim               | Motivo | EmpresaId                                                                                            | Observacao | Documento                    | GrupoTarefaId | Componentes                                                                                                                                                                                                                                                                                                                                                                                                                                                              | DadosBaseFrete                                                                                                                        |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga BDD - Lotação') | 0      | -25,44372          | -49,27898           | Curitiba         | PR           | R. PASTEUR, 463 - BATEL, CURITIBA - PR, 80250-104, BRASIL |                         | 1    | 02/11/2030 03:00:00 |                     | 1      | (select Id from envolvidos where nome = 'Empresa padrão para pedidos' and ownerId = [obtem ownerId]) |            |                              |               | []                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                                                                       |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga BDD - Lotação') | 1      | -22,90685          | -43,1729            | Rio de Janeiro   | RJ           | Rio de Janeiro, RJ, Brasil                                |                         | 3    |                     | 04/11/2030 03:00:00 | 2      |                                                                                                      |            | 09071984A01TF, 09071984A03TF |               | [{"CategoriaId":"6227ffcd-0918-4b41-a6f1-850a5f131b85","Descricao":"Taxa de frete","Valor":1575.0,"ValorCondicao":true,"Variavel":"{{TaxaDeFrete}}","FormulaValor":"1.575,00","FormulaCondicao":""},{"CategoriaId":"6227ffcd-0918-4b41-a6f1-850a5f131b85","Descricao":"adicional de coleta fora de sp","Valor":393.75,"ValorCondicao":true,"Variavel":"{{AdicionalDeColetaForaDeSp}}","FormulaValor":"1.575,00 * (25,00 / 100)","FormulaCondicao":"not PR in (\"SP\")"}] | {"Cubagem":10.5,"PesoReal":4362.0,"Distancia":856.7389000000001,"PesoConsiderado":4362.0,"PesoCubado":false,"SLA":24,"Total":1968.75} |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaRota", <table>) (0,9s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamento"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                      | ValorTarifa | PedagioInclusoTarifa | ValorAdiantamento | TipoAdiantamento | AceitaContraProposta | FormaPagamento | LivreTaxaDescarga | LivreTaxaCarga | TipoTarifaCargaId                    |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga BDD - Lotação') | 1968,75     | false                |                   |                  | false                | 3              | false             | false          | 12820fdf-ff63-4cd4-858a-5d89eb6dc23f |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (0,2s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertaCargaContato"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                      | ContatoId |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga BDD - Lotação') |           |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertaCargaContato", <table>) (0,1s)

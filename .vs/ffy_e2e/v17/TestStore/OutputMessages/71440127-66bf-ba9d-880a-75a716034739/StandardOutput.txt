@@ -1,0 +1,54 @@
+Dado a importação de pedidos em pré-condição
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosEmPre_Condicao() (0,0s)
+E o módulo "Formação de carga" em pré-condição
+-> done: NavigateSteps.GivenOModuloEmPre_Condicao("Formação de carga") (0,0s)
+Quando selecionado o filtro de data pelo período de "Tudo" em pré-condição
+-> done: ActionSteps.WhenSelecionadoOFiltroDeDataPeloPeriodoDeEmPre_Condicao("Tudo") (0,0s)
+E atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a importação de pedidos via excel
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosViaExcel() (12,9s)
+E a rotina "Formação de carga|Pedidos"
+-> done: NavigateSteps.DadoARotina("Formação de carga...") (6,4s)
+Quando "Desativar" o registro da grid com valor "09071984A01"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Desativar", "09071984A01") (7,1s)
+Então deve haver a notificação na tela "Desativação realizada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Desativação reali...") (0,2s)
+E devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento  | DhColeta            | DhEntrega           | CubagemTotal | MinutaId | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade | DestinoLatitude | DestinoLocalidade                                            | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                          | OrigemLongitude | OrigemNomeEmpresa       | OrigemUF | OrdenacaoMinuta | Observacoes | Agrupador | PedidoOrigemId | TipoLote | UnidadeNegocioId  | Ativo | LoteDistribuido |
+  | [obtem ownerId] | 09071984A01 | 02/11/2020 03:00:00 | 04/11/2020 03:00:00 | 10,000000    |          | 1562,000  | 1          | D95F43C4-8B4D-4904-9A32-C497F4BAE02B | 1500,00     | Cascalho Rico | -18,57699       | R. Arédio Santos, 111 - Cascalho Rico, MG, 38460-000, Brasil | -47,87559        |                    | MG        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                 |             |           |                | false    | [obtem unidadeid] | false | false           |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (0,4s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                                           | Codigo | Descricao | Cubagem | Peso | Quantidade | TipoAcondicionamentoId |
+  | select Id from PedidoItem where PedidoId in (select Id from pedido where ownerId = [obtem ownerId]) |        |           |         |      |            |                        |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (4,4s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | CargaGeradaId | Situacao | VeiculoConjuntoId | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao | DhCargaGerada | Distancia | Duracao | CorrelationId | CargaGeradaCodigo | UnidadeNegocioId |
+  | [obtem ownerId] |               |          |                   |           |              |            |                 |              |           |               |           |         |               |                   |                  |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,2s)
+Quando "Ativar" o registro da grid com valor "09071984A01"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Ativar", "09071984A01") (7,1s)
+Então deve haver a notificação na tela "Ativação realizada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Ativação realizad...") (0,3s)
+E devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento  | DhColeta            | DhEntrega           | CubagemTotal | MinutaId | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade | DestinoLatitude | DestinoLocalidade                                            | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                          | OrigemLongitude | OrigemNomeEmpresa       | OrigemUF | OrdenacaoMinuta | Observacoes | Agrupador | PedidoOrigemId | TipoLote | UnidadeNegocioId  | Ativo | LoteDistribuido |
+  | [obtem ownerId] | 09071984A01 | 02/11/2020 03:00:00 | 04/11/2020 03:00:00 | 10,000000    |          | 1562,000  | 1          | D95F43C4-8B4D-4904-9A32-C497F4BAE02B | 1500,00     | Cascalho Rico | -18,57699       | R. Arédio Santos, 111 - Cascalho Rico, MG, 38460-000, Brasil | -47,87559        |                    | MG        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                 |             |           |                | false    | [obtem unidadeid] | true  | false           |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (0,4s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                                           | Codigo | Descricao | Cubagem | Peso | Quantidade | TipoAcondicionamentoId |
+  | select Id from PedidoItem where PedidoId in (select Id from pedido where ownerId = [obtem ownerId]) |        |           |         |      |            |                        |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (4,4s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | CargaGeradaId | Situacao | VeiculoConjuntoId | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao | DhCargaGerada | Distancia | Duracao | CorrelationId | CargaGeradaCodigo | UnidadeNegocioId |
+  | [obtem ownerId] |               |          |                   |           |              |            |                 |              |           |               |           |         |               |                   |                  |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,2s)

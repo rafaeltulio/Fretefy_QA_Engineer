@@ -1,0 +1,35 @@
+Quando excluir todas as cargas da RegressionFy Embarcadora Ltda em pré-condição
+-> done: FretefyCargaSteps.QuandoExcluirTodasAsCargasDaBDDEmbarcadoraLtdaEmPre_Condicao() (0,0s)
+Dado o cadastro de empresa como embarcadora
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaComoEmbarcadora() (0,4s)
+E o cadastro de Empresa Envolvida padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadrao() (0,6s)
+E a oferta de carga restrita com valores padrão
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadrao() (5,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado o cadastro de Template padrão de Carga
+-> done: FretefyCargaSteps.DadoOCadastroDeTemplatePadraoDeCarga() (0,2s)
+E o cadastro geral "Carga a partir de um template"
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroGeral("Carga a partir de...") (7,9s)
+Dado o valor "Template BDD - R" para o campo "[s] Template "
+-> done: ValueSteps.DadoOValorParaOCampo("Template BDD - R", "[s] Template ") (0,8s)
+Dado o valor "[data atual]" para o campo "[date]Data de coleta¹"
+-> done: ValueSteps.DadoOValorParaOCampo("[data atual]", "[date]Data de col...") (0,6s)
+Quando clicar no botão "Adicionar carga"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar carga") (1,6s)
+E aguardar o carregamento da tela
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,1s)
+E fechar a notificação na tela
+-> done: DialogSteps.QuandoFecharANotificacaoNaTela() (0,1s)
+E clicar no botão oculto "Salvar como template"
+-> done: ActionSteps.QuandoClicarNoBotaoOculto("Salvar como template") (1,5s)
+E remover o template "Template BDD - R"
+-> done: FretefyCargaSteps.QuandoRemoverOTemplate("Template BDD - R") (1,6s)
+Então deve haver a notificação na tela "Exclusão realizada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Exclusão realizad...") (0,7s)
+E não devem haver os valores na tabela "OfertaCargaTemplate"
+  --- table step argument ---
+  | *Nome            | Template                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+  | Template BDD - R | {"Codigo":null,"OfertaCargaId":null,"FreteFyId":null,"StorageId":null,"PerfilId":null,"NomePerfil":null,"Cached":false,"OrigemDestino":[{"Id":"00000000-0000-0000-0000-000000000000","empresaId":null,"Localidade":"Curitiba, PR, Brasil","Cidade":"Curitiba","Uf":"PR","Lat":-25.4289532,"Lng":-49.2671356,"DhInicio":null,"DhFim":null,"Rota":1,"Motivo":null,"PlaceId":"chijmbqppolh3jqrbpbkbuemi2w","Ordem":0,"Observacao":null},{"Id":"00000000-0000-0000-0000-000000000000","Localidade":"Imbituba, SC, Brasil","Cidade":"Imbituba","Uf":"SC","Lat":-28.2276268,"Lng":-48.66913,"DhInicio":null,"DhFim":null,"Rota":3,"Motivo":null,"PlaceId":"ChIJ09U2kI3KJpURzhSxwj2LKyI","Ordem":1,"Observacao":""}],"Carga":{"UnidadMedidaId":null,"Modalidade":1,"PesoBruto":50000.0,"Volume":0.0,"TipoCargaId":"f7583a31-d353-4334-86ce-2b98d217bee2","NaturezaCargaId":"6d186aac-8883-4135-94e7-db4d4f702d26","CodIdentificador":"Template BDD - Ro padrão","tipofrete":1},"veiculo":{"TipoPessoa":3,"TiposVeiculo":["d4693a96-d64f-49f9-bcde-45c996afd3e7"],"TiposCarrocerias":["dbde88c0-daaf-492e-9024-53f822cb0609"],"Rastreadores":null,"Gerenciadores":null},"Visibilidade":{"Visibilidade":1,"Empresas":[],"oferecimentoexecucaoatualid":null},"Pagamento":{"TipoTarifaId":"25272F18-A53F-4F0D-A84B-F56688DBA202","ValorFrete":0.0,"Pedagio":false,"Adiantamento":null,"TipoAdiantamento":10,"AceitaProposta":false,"FormaPagamento":{"FormaPagamento":3,"Cartoes":[],"Bancos":null,"LivreTaxaCarga":false,"LivreTaxaDescarga":false}},"Contatos":[{"ContatoId":"94332ea2-e2a6-e811-b4b0-0003ff34514b","QtdPublicacoes":1,"Distancia":376302.0,"Tempo":"4h36min","CustoEstimado":null,"Situacao":0,"oferecimentoexecucaoatualid":null,"motoristaid":null,"equipamentosids":null} |
+-> done: DataSteps.EntaoNaoDevemHaverOsValoresNaTabela("OfertaCargaTemplate", <table>) (0,0s)

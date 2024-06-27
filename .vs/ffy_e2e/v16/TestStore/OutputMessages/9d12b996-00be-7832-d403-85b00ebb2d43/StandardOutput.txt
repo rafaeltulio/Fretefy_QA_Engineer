@@ -1,0 +1,68 @@
+Dado o cadastro de empresa como embarcadora em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaComoEmbarcadoraEmPre_Condicao() (0,0s)
+E o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,0s)
+E a oferta de carga restrita com valores padrão em pré-condição
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadraoEmPre_Condicao() (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a tela de cadastro de cargas
+-> done: FretefyCargaSteps.DadoATelaDeCadastroDeCargas() (4,5s)
+E o valor "Alocação" para o campo "[gb] Transportador determinado por"
+-> done: ValueSteps.DadoOValorParaOCampo("Alocação", "[gb] Transportado...") (0,2s)
+E o valor "marcado" para o campo "[c] Apenas cavalo mecânico"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] Apenas cavalo...") (0,7s)
+E o valor "[data atual]" para o campo "[date]Data de coleta¹"
+-> done: ValueSteps.DadoOValorParaOCampo("[data atual]", "[date]Data de col...") (0,3s)
+E as entregas da carga
+  --- table step argument ---
+  | Endereço         | [date]Previsão de entrega¹ | [b] Placa | Documento |
+  | Rua pasteur, 463 | [data atual]               | BDD9F76   | ABC       |
+-> done: FretefyCargaSteps.DadoAsEntregasDaCarga(<table>) (9,8s)
+Quando clicar no botão "Adicionar carga"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar carga") (1,1s)
+E aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,1s)
+Então a URL da pagina deve conter "(drawer:cargas/detalhes/"
+-> done: NavigateSteps.EntaoAURLDaPaginaDeveConter("(drawer:cargas/de...") (0,3s)
+Então os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCarga"
+  --- table step argument ---
+  | *Id            | Situacao | Visibilidade | DhColeta | DhEntrega | MotivoDesativacaoId | DhCancelamento | DhDesativacao | DhFinalizacao | CustoEstimado | UnidadeNegocioId                                            |
+  | [Obtem da url] | 2        | 1            |          |           |                     |                |               |               |               | (select Id from UnidadesNegocio where Descricao = 'Padrão') |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCarga", <table>) (1,6s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaCarga"
+  --- table step argument ---
+  | *OfertaCargaId | Modalidade | Peso  | Volume | UnidadeVolume | TipoCargaId | TipoNaturezaCargaId | CodIdentificador | AcondicionamentoQtd | ValorCarga |
+  | [Obtem da url] | 1          | 0,000 |        | 7             |             |                     |                  |                     |            |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaCarga", <table>) (1,5s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaVeiculo"
+  --- table step argument ---
+  | *OfertaCargaId | TipoPessoa | ApenasCavaloMecanico |
+  | [Obtem da url] | 0          | true                 |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaVeiculo", <table>) (1,6s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaRota"
+  --- table step argument ---
+  | *OfertaCargaId | *Ordem | LocalidadeCidade | LocalidadeUF | LocalidadeLocalidade                                      | LocalidadeGooglePlaceId     | Rota | Motivo | Observacao | Documento | DhInicio     | DhFim        | EmpresaId                                                                |
+  | [Obtem da url] | 0      | Curitiba         | PR           | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | 1    | 1      |            |           | [data atual] |              | (select Id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda') |
+  | [Obtem da url] | 1      | Curitiba         | PR           | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | 3    | 2      |            | ABC       |              | [data atual] |                                                                          |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaRota", <table>) (3,1s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamento"
+  --- table step argument ---
+  | *OfertaCargaId | ValorTarifa | PedagioInclusoTarifa | ValorAdiantamento | TipoAdiantamento | AceitaContraProposta | FormaPagamento | LivreTaxaDescarga | LivreTaxaCarga | TipoTarifaCargaId                    |
+  | [Obtem da url] |             | false                |                   |                  | false                | 3              | false             | false          | 25272F18-A53F-4F0D-A84B-F56688DBA202 |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,5s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposCartao"
+  --- table step argument ---
+  | *OfertaCargaId | TipoCartaoId |
+  | [Obtem da url] |              |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposBancoDeposito"
+  --- table step argument ---
+  | *OfertaCargaId | TipoBancoDepositoId | OfertaCargaId1 |
+  | [Obtem da url] |                     |                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertaCargaContato"
+  --- table step argument ---
+  | *OfertaCargaId | ContatoId |
+  | [Obtem da url] |           |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertaCargaContato", <table>) (1,4s)

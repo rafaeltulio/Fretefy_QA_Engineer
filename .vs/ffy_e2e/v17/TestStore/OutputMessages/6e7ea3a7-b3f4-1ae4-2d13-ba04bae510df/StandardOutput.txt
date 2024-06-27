@@ -1,0 +1,48 @@
+Dado a importação de pedidos em pré-condição
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosEmPre_Condicao() (0,0s)
+E o módulo "Formação de carga" em pré-condição
+-> done: NavigateSteps.GivenOModuloEmPre_Condicao("Formação de carga") (0,0s)
+Quando selecionado o filtro de data pelo período de "Tudo" em pré-condição
+-> done: ActionSteps.WhenSelecionadoOFiltroDeDataPeloPeriodoDeEmPre_Condicao("Tudo") (0,0s)
+E atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a importação de pedidos com produtos via excel
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosComProdutosViaExcel() (9,8s)
+Dado a rotina "Formação de carga|Pedidos"
+-> done: NavigateSteps.DadoARotina("Formação de carga...") (6,4s)
+Quando "Editar" o registro da grid com valor "09071984B02"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Editar", "09071984B02") (3,5s)
+E clicar no botão "Adicionar item"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar item") (1,0s)
+Dado os valores para os campos
+  --- table step argument ---
+  | Código           | Descrição          | [s] AcondicionamentoItem | CubagemItem | PesoItem | QuantidadeItem |
+  | 09071984B02Item1 | 09071984B02 Item 1 | Unidades                 | 0,123456    | 0,123456 | 12345678       |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (10,5s)
+Quando clicar no botão "Adicionar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar") (1,3s)
+Dado o valor "[hoje]" para o campo "[date] Coleta"
+-> done: ValueSteps.DadoOValorParaOCampo("[hoje]", "[date] Coleta") (0,4s)
+Quando clicar no botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (1,2s)
+Então deve haver a notificação na tela "Alteração efetuada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Alteração efetuad...") (0,5s)
+E devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento  | DhColeta | DhEntrega | CubagemTotal | MinutaId | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade | DestinoLatitude | DestinoLocalidade                                         | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                          | OrigemLongitude | OrigemNomeEmpresa       | OrigemUF | OrdenacaoMinuta | Observacoes          | Agrupador |
+  | [obtem ownerId] | 09071984B02 | [hoje]   |           | 13,000000    |          | 5276,000  | 7          | F7583A31-D353-4334-86CE-2B98D217BEE2 | 4800,00     | Curitiba      | -25,44372       | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898        |                    | PR        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                 | Entregar na portaria |           |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (0,4s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                            | *Codigo          | Descricao          | Cubagem  | Peso  | Quantidade | TipoAcondicionamentoId               |
+  | select Id from pedido where Documento = '09071984B02' and ownerId =  [obtem ownerId] | 09071984B02Item1 | 09071984B02 Item 1 | 0,123456 | 0,123 | 12345678   | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (0,1s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | CargaGeradaId | Situacao | VeiculoConjuntoId | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao | DhCargaGerada | Distancia | Duracao |
+  | [obtem ownerId] |               |          |                   |           |              |            |                 |              |           |               |           |         |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,2s)

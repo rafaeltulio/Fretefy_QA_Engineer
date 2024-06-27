@@ -1,0 +1,66 @@
+Dado o cadastro de empresa como embarcadora em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaComoEmbarcadoraEmPre_Condicao() (0,0s)
+E o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,0s)
+E a oferta de carga restrita com valores padrão em pré-condição
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadraoEmPre_Condicao() (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a tela de cadastro de cargas
+-> done: FretefyCargaSteps.DadoATelaDeCadastroDeCargas() (5,8s)
+E os valores para os campos
+  --- table step argument ---
+  | [gb] Transportador determinado por | [valor] Frete | [date]Data de coleta¹ | [s] EmpresaEntregas     | [gb] Transportador determinado por | [ms] Tipo do veículo                                                                                 | [ms] Tipo da carroceria                                                                                                                                                      |
+  | Captação                           | 5000,00       | [data atual]          | Empresa envolvida Razão | Captação                           | 3/4;Bitrem;Bitruck;Carreta;Carreta LS;Carreta trucada 6x2 até 32 ton;Rodotrem;Toco;Tritrem;Truck;VLC | Baú;Baú Frigorífico;Boiadeiro;Caçamba;Canavieira;Cavaqueira;Cegonheiro;Florestal;Gaiola;Grade Baixa;Graneleiro;Munk;Plataforma;Prancha;Sider;Silo;Tanque;Bug Porta Conteiner |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (11,2s)
+Quando clicar no botão "Adicionar entrega"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar entrega") (1,1s)
+E aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,2s)
+E clicar no botão "Adicionar carga"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar carga") (1,3s)
+E aguardar o carregamento da página "Carga P-"
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina("Carga P-") (0,1s)
+Então a URL da pagina deve conter "/encontrar-veiculo)"
+-> done: NavigateSteps.EntaoAURLDaPaginaDeveConter("/encontrar-veiculo)") (1,1s)
+Então os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCarga"
+  --- table step argument ---
+  | *Id            | Situacao | Visibilidade | DhColeta | DhEntrega | MotivoDesativacaoId | DhCancelamento | DhDesativacao | DhFinalizacao | UnidadeNegocioId                                            |
+  | [Obtem da url] | 1        | 3            |          |           |                     |                |               |               | (select Id from UnidadesNegocio where Descricao = 'Padrão') |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCarga", <table>) (1,6s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaCarga"
+  --- table step argument ---
+  | *OfertaCargaId | Modalidade | Peso  | Volume | UnidadeVolume | TipoCargaId | TipoNaturezaCargaId | CodIdentificador | AcondicionamentoQtd | ValorCarga |
+  | [Obtem da url] | 1          | 0,000 |        | 7             |             |                     |                  |                     |            |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaCarga", <table>) (1,5s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaVeiculo"
+  --- table step argument ---
+  | *OfertaCargaId | TipoPessoa | ApenasCavaloMecanico |
+  | [Obtem da url] | 0          | false                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaVeiculo", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaRota"
+  --- table step argument ---
+  | *OfertaCargaId | *Ordem | LocalidadeCidade | LocalidadeUF | LocalidadeLocalidade                                      | LocalidadeGooglePlaceId     | Rota | Motivo | EmpresaId                                                                                                                                                   | Observacao | Documento | DhInicio     | DhFim |
+  | [Obtem da url] | 0      | Curitiba         | PR           | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | 1    | 1      | (select Id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda' and OwnerId = (select Id from Owners where Name = 'RegressionFy Embarcadora Ltda')) |            |           | [data atual] |       |
+  | [Obtem da url] | 1      | Curitiba         | PR           | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | 3    | 2      | (select Id from Envolvidos where Nome = 'Empresa envolvida Razão' and OwnerId = (select Id from Owners where Name = 'RegressionFy Embarcadora Ltda'))       |            |           |              |       |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaRota", <table>) (3,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamento"
+  --- table step argument ---
+  | *OfertaCargaId | ValorTarifa | PedagioInclusoTarifa | ValorAdiantamento | TipoAdiantamento | AceitaContraProposta | FormaPagamento | LivreTaxaDescarga | LivreTaxaCarga | TipoTarifaCargaId                    |
+  | [Obtem da url] | 5000,00     | false                |                   |                  | false                | 3              | false             | false          | 25272F18-A53F-4F0D-A84B-F56688DBA202 |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,5s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposCartao"
+  --- table step argument ---
+  | *OfertaCargaId | TipoCartaoId |
+  | [Obtem da url] |              |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposBancoDeposito"
+  --- table step argument ---
+  | *OfertaCargaId | TipoBancoDepositoId | OfertaCargaId1 |
+  | [Obtem da url] |                     |                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertaCargaContato"
+  --- table step argument ---
+  | *OfertaCargaId | ContatoId |
+  | [Obtem da url] |           |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertaCargaContato", <table>) (1,4s)

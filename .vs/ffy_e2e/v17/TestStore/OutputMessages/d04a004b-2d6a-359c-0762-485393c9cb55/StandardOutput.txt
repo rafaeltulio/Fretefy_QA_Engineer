@@ -1,0 +1,86 @@
+Quando deletadas todas as Remessas em pré-condição
+-> done: FretefyCrossdocking.QuandoDeletadasTodasAsRemessasEmPre_Condicao() (0,0s)
+Dado o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,0s)
+E o cadastro da Unidade de Negócio "CD Matriz" vinculada a uma empresa em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaUnidadeDeNegocioVinculadaAUmaEmpresaEmPre_Condicao("CD Matriz") (0,0s)
+E o cadastro da Unidade de Negócio "CD Curitiba" vinculada a uma empresa em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaUnidadeDeNegocioVinculadaAUmaEmpresaEmPre_Condicao("CD Curitiba") (0,0s)
+Dado o logoff e login do Sistema em pré-condição
+-> done: FretefyGeralSteps.GivenOLogoffELoginDoSistemaEmPre_Condicao() (0,0s)
+Quando selecionado a Unidade de Negócio "CD Curitiba" em pré-condição
+-> done: FretefyGeralSteps.QuandoSelecionadoAUnidadeDeNegocioEmPre_Condicao("CD Curitiba") (0,0s)
+Dado o cadastro da Característica Crossdocking padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaCrossdockingPadrao() (0,1s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado o cadastro da Característica Crossdocking padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaCrossdockingPadrao() (0,1s)
+E a rotina "Crossdocking"
+-> done: NavigateSteps.DadoARotina("Crossdocking") (5,8s)
+Quando acionado o botão "Cadastrar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Cadastrar") (1,2s)
+Dados os valores para os campos
+  --- table step argument ---
+  | Código da remessa    | [s] Agente da carga           | [ms] Contato agente | [s] Tomador do serviço        | [ms] Contatos | Observações                     | [s] Característica                | [ms]Restrição              | [c] Urgente | personalizado obrigatório |
+  | Refer.: 123456789ABC | RegressionFy Embarcadora Ltda | Contato BDD 1       | RegressionFy Embarcadora Ltda | Contato BDD 2 | Observações gerais Crossdocking | Característic Crossdocking padrão | Restrição cross regression | Sim         | personalizado obrigatório |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (20,7s)
+Dados os valores para os campos
+  --- table step argument ---
+  | [ms] EmpresaRemetente         | [ms] EmpresaDestinatario | [ms] Terminal de coleta       | [ms] Terminal de entrega | [be] Local de coleta                                      | [be] Local de entrega                                     | [data range] Data de coleta | [data range] Data de entrega |
+  | RegressionFy Embarcadora Ltda | Empresa envolvida Razão  | RegressionFy Embarcadora Ltda | Empresa envolvida Razão  | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | [hoje]                      | [data atual +2]              |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (28,7s)
+Quando acionado o botão "Adicionar documento"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar documento") (1,0s)
+Dados os valores para os campos
+  --- table step argument ---
+  | Nota Fiscal | [date] Data da emissão | Série | Chave                                                  | Referência | [s]Acondicionamento | Valor   | Imposto suspenso | Quantidade | Peso | Volume |
+  | 123456789AA | [hoje]                 | única | 2321 3465 4654 6546 5122 1321 6546 5400 0000 0000 0000 | ref. 0145  | Caixa               | 1580,55 | 2370,82          | 5          | 5,05 | 1,01   |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (11,9s)
+Quando acionado o botão "Adicionar item"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar item") (1,0s)
+E acionado o botão "Expandir"
+-> done: ActionSteps.QuandoAcionadoOBotao("Expandir") (13,1s)
+Dados os valores para os campos
+  --- table step argument ---
+  | Código do produto                                                      | Nome do produto | [s]Acondicionamento | Quantidade de volumes | Peso total | Volume    | Comprimento | Largura | Altura |
+  | 100000000000000000000000000000000000000000000000000000000000000000001x | Produto 01      | Caixa               | 999999999             | 999999     | 1,0101110 | 56,61       | 65,89   | 24,77  |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (14,7s)
+Quando acionado o botão "Adicionar item"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar item") (1,0s)
+E acionado o botão "Expandir"
+-> done: ActionSteps.QuandoAcionadoOBotao("Expandir") (13,6s)
+Dados os valores para os campos
+  --- table step argument ---
+  | Código do produto                                                      | Nome do produto | [s]Acondicionamento | Quantidade de volumes | Peso total | Volume    | Comprimento | Largura | Altura |
+  | 100000000000000000000000000000000000000000000000000000000000000000002x | Produto 02      | Caixa               | 999999999             | 999999     | 1,0101110 | 56,61       | 65,89   | 24,77  |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (14,7s)
+Quando acionado o botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (1,2s)
+Entao deve haver a notificação na tela "Remessa cadastrada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Remessa cadastrad...") (2,0s)
+E devem haver os dados na tabela "Remessa"
+  --- table step argument ---
+  | *OwnerId        | CreationUserId | ModificationUserId | ModificationTime | UnidadeNegocioId                                                                               | Situacao | TomadorServicoId                                                                                       | AgenteCargaId                                                                                          | ContatoAgenteId                                                                      | RemetenteId                                                                                            | ColetaLatitude | ColetaLongitude | ColetaCidade | ColetaUF | ColetaLocalidade                                          | ColetaCEP | ColetaGooglePlaceId         | DestinatarioId                                                                                   | EntregaLatitude | EntregaLongitude | EntregaCidade | EntregaUF | EntregaLocalidade                                         | EntregaCEP | EntregaGooglePlaceId        | TerminalCargaId                                                                                        | TerminalEntregaId                                                                                | DhColeta | DhEntrega | Observacoes                     | Urgente | CaracteristicaId                                                                                                    | CamposAdicionais                                                                                                                                                                                                         | HistoricoAtualId | Codigo               | GrupoTarefaColetaId | GrupoTarefaEntregaId | ResponsavelId                        | ImpostoSuspenso | UsuarioDesativacaoId | Origem | PedidoId | LiberadaParaCarga |
+  | [Obtem OwnerId] | [Obtem UserId] |                    |                  | (Select id from UnidadesNegocio where Descricao = 'CD Curitiba' and ownerId = [Obtem ownerId]) | 1        | (Select id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda' and ownerId = [Obtem ownerId]) | (Select id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda' and ownerId = [Obtem ownerId]) | (Select id from Contatos where Nome = 'Contato BDD 1' and ownerId = [Obtem ownerId]) | (Select id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda' and ownerId = [Obtem ownerId]) | -25,44372      | -49,27898       | Curitiba     | PR       | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | 80250104  | ChIJ74mkHXrk3JQRvvirz4xzlnE | (Select id from Envolvidos where Nome = 'Empresa envolvida Razão' and ownerId = [Obtem ownerId]) | -25,44372       | -49,27898        | Curitiba      | PR        | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | 80250104   | ChIJ74mkHXrk3JQRvvirz4xzlnE | (Select id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda' and ownerId = [Obtem ownerId]) | (Select id from Envolvidos where Nome = 'Empresa envolvida Razão' and ownerId = [Obtem ownerId]) | [hoje]   | [hoje]    | Observações gerais Crossdocking | True    | (select Id from Caracteristica where Descricao = 'Característic Crossdocking padrão' and ownerId = [Obtem ownerId]) | [{"Id":"PersonalizadoObrigatório","Nome":"personalizado obrigatório","Valor":"personalizado obrigatório","Tipo":"texto","Obrigatorio":true,"informacaocomplementar1":null,"informacaocomplementar2":null,"opcoes":null}] |                  | Refer.: 123456789ABC |                     |                      | bcf638ad-9cf0-4f20-8802-e61ab1fa3c1c | 2370,82         |                      | 1      |          |                   |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Remessa", <table>) (0,8s)
+E devem haver os dados na tabela "RemessaDocumento"
+  --- table step argument ---
+  | *RemessaId                                               | Serie | NotaFiscal | DhNotaFiscal | Chave                                        | Referencia | TipoCargaId                          | Quantidade | Peso  | Volume   | Valor   | Itens                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | ImpostoSuspenso |
+  | (SELECT id from Remessa where OwnerId = [Obtem OwnerId]) | única | 123456789  | [hoje]       | 23213465465465465122132165465400000000000000 | ref. 0145  | b8eb87bc-e39b-4799-993a-dd89ac93af06 | 5          | 5,050 | 1,010000 | 1580,55 | [{"Id":"00000000-0000-0000-0000-000000000000","RemessaDocumentoId":"00000000-0000-0000-0000-000000000000","Codigo":"100000000000000000000000000000000000000000000000000000000000000000001x","Nome":"Produto 01","TipoCargaId":null,"Quantidade":999999999,"Peso":999999.0,"Volume":null,"Comprimento":56.61,"Largura":65.89,"Altura":24.77},{"Id":"00000000-0000-0000-0000-000000000000","RemessaDocumentoId":"00000000-0000-0000-0000-000000000000","Codigo":"100000000000000000000000000000000000000000000000000000000000000000002x","Nome":"Produto 02","TipoCargaId":null,"Quantidade":999999999,"Peso":999999.0,"Volume":null,"Comprimento":56.61,"Largura":65.89,"Altura":24.77}] | 2370,82         |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("RemessaDocumento", <table>) (0,2s)
+E devem haver os dados na tabela "RemessaContato"
+  --- table step argument ---
+  | *RemessaId                                               | ContatoId                                                                            |
+  | (SELECT id from Remessa where OwnerId = [Obtem OwnerId]) | (SELECT Id from Contatos where nome = 'Contato BDD 2' and ownerId = [Obtem ownerId]) |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("RemessaContato", <table>) (0,0s)
+E devem haver os dados na tabela "RemessaRestricao"
+  --- table step argument ---
+  | *RemessaId                                               | Restricao                  |
+  | (SELECT id from Remessa where OwnerId = [Obtem OwnerId]) | Restrição cross regression |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("RemessaRestricao", <table>) (0,0s)
+E devem haver os dados na tabela "RemessaHistorico"
+  --- table step argument ---
+  | *RemessaId                                               | CreationUserId | ModificationUserId | Ordem | EmpresaOrigemId | OrigemLatitude | OrigemLongitude | OrigemCidade | OrigemUF | OrigemLocalidade | OrigemCEP | OrigemGooglePlaceId | EmpresaDestinoId | DestinoLatitude | DestinoLongitude | DestinoCidade | DestinoUF | DestinoLocalidade | DestinoCEP | DestinoGooglePlaceId | Situacao | OfertaCargaId | Tipo | UnidadeDestinoId | UnidadeOrigemId |
+  | (SELECT id from Remessa where OwnerId = [Obtem OwnerId]) | [Obtem UserId] |                    | 1     |                 |                |                 |              |          |                  |           |                     |                  |                 |                  |               |           |                   |            |                      | 3        |               | 4    |                  |                 |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("RemessaHistorico", <table>) (0,4s)

@@ -1,0 +1,53 @@
+Quando deletado a Empresa "Empresa envolvida Razão"
+-> done: FretefyConfigCadastrosSteps.QuandoDeletadoAEmpresaEnvolvida("Empresa envolvida...") (0,6s)
+Dado a rotina "Configurações|Empresas"
+-> done: NavigateSteps.DadoARotina("Configurações|Emp...") (4,5s)
+Quando acionar o botão "Cadastrar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Cadastrar") (1,1s)
+Dados os valores para os campos
+  --- table step argument ---
+  | [mask] Documento | Nome                    | E-mail                   | [be] Endereço    | [mask] Telefone | [ms] Categoria aplicada na tabela de frete                                                                                                                                                                                                                                                                                                                                                   |
+  | 10366168000179   | Empresa envolvida Razão | envolvidobdd@fretefy.com | Rua pasteur, 463 | 41991657266     | Ad valoren;Entrega adicional ou coleta adicional;Entrega emergencial;Devolução - ao local de coleta;Cofins;Frete peso;Frete valor;ICMS;ISS;Pedágio;GRIS;Diária;Re - entrega;Sefaz;Pis;Pernoite;Seguro - RCTR - C;Taxa de despacho;Taxa de paletização;Taxa de dificuldade de entrega(TDE);Taxa de permanência;Taxa de restrição ao trânsito(TRT);Valor da descarga;Valor do ajudante / chapa |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (9,5s)
+Quando acionar o botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (0,7s)
+Então deve haver a notificação na tela "Empresa cadastrada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Empresa cadastrad...") (0,3s)
+E devem haver os valores na tabela "Empresas"
+  --- table step argument ---
+  | *ownerId        | *Id                                                                | Email                    | EnderecoCidade | EnderecoUF | EnderecoLocalidade                                        | EnderecoGooglePlaceId       | Ativo |
+  | [Obtem OwnerId] | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | envolvidobdd@fretefy.com | Curitiba       | PR         | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | True  |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Empresas", <table>) (0,1s)
+E devem haver os valores na tabela "Envolvidos"
+  --- table step argument ---
+  | *ownerId        | *NomeCompleto           | DocumentoNumero | RGNumero | RGOrgaoEmissor | RGUFEmissor | RGDataEmissao | TelefoneNumero | IE | Nome                    |
+  | [Obtem OwnerId] | Empresa envolvida Razão | 10366168000179  |          |                |             |               | 41991657266    |    | Empresa envolvida Razão |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Envolvidos", <table>) (0,1s)
+E devem haver os valores na tabela "EmpresaCategoria"
+  --- table step argument ---
+  | *EmpresaId                                                         | *CategoriaId                         | CategoriaId                          |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 8F21BF68-7427-4C57-8164-00FFC5B9B207 | 8F21BF68-7427-4C57-8164-00FFC5B9B207 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 9F00A777-CFAA-40A2-BF48-12ABB98656B3 | 9F00A777-CFAA-40A2-BF48-12ABB98656B3 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 280BCF77-5EE7-4564-B0E3-159EAF476012 | 280BCF77-5EE7-4564-B0E3-159EAF476012 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 12011E13-0E28-4940-95B7-1D6167AB254E | 12011E13-0E28-4940-95B7-1D6167AB254E |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | E7FDA5C6-A72C-4C12-BA0D-21AB568817D1 | E7FDA5C6-A72C-4C12-BA0D-21AB568817D1 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 1CD3E41A-F6FF-4584-93FC-240FF577A76B | 1CD3E41A-F6FF-4584-93FC-240FF577A76B |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 2FBF84F1-6775-4B8A-B37E-25A5EABF50D3 | 2FBF84F1-6775-4B8A-B37E-25A5EABF50D3 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | B451539D-910C-4974-ACEF-324666B0705B | B451539D-910C-4974-ACEF-324666B0705B |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 8B468DE7-EB2C-4A85-8D56-40FFBD0F2915 | 8B468DE7-EB2C-4A85-8D56-40FFBD0F2915 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | C6CCD754-C1CE-4F8B-82EB-458BBB4E90C9 | C6CCD754-C1CE-4F8B-82EB-458BBB4E90C9 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | BBCFD25F-3158-4A92-A9F4-4DFD37C4C35D | BBCFD25F-3158-4A92-A9F4-4DFD37C4C35D |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | E2795966-DDFC-4A23-93E7-64DFCBE41FFD | E2795966-DDFC-4A23-93E7-64DFCBE41FFD |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | C88485EB-63EA-497D-9FB0-6C42DB547E9F | C88485EB-63EA-497D-9FB0-6C42DB547E9F |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 15010CAB-810E-4094-9C7E-6CEFBF3CD36C | 15010CAB-810E-4094-9C7E-6CEFBF3CD36C |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 71977907-12CF-45D8-AC3C-7078B6DE7E85 | 71977907-12CF-45D8-AC3C-7078B6DE7E85 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 56B388C3-ABB8-4CDE-AA71-71FBF952C262 | 56B388C3-ABB8-4CDE-AA71-71FBF952C262 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 6227FFCD-0918-4B41-A6F1-850A5F131B85 | 6227FFCD-0918-4B41-A6F1-850A5F131B85 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | F2937F03-42CA-4972-B265-94C5DC47F0F6 | F2937F03-42CA-4972-B265-94C5DC47F0F6 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 75B4355E-C424-4AAE-9425-B6349DA4B9FB | 75B4355E-C424-4AAE-9425-B6349DA4B9FB |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | D15C85A3-93E4-43CA-BF0F-DE03B01BAFF3 | D15C85A3-93E4-43CA-BF0F-DE03B01BAFF3 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 7968C671-9293-4EB9-AC8E-E2C3C1314074 | 7968C671-9293-4EB9-AC8E-E2C3C1314074 |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 44C1457C-976F-4424-98CB-ED9B34FB2ACD | 44C1457C-976F-4424-98CB-ED9B34FB2ACD |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | 8DFFE3CA-0E9D-4DDB-9DF4-F4150CDB001B | 8DFFE3CA-0E9D-4DDB-9DF4-F4150CDB001B |
+  | (SELECT Id FROM Envolvidos where Nome = 'Empresa envolvida Razão') | DF5D09EB-19F2-4938-95A9-F6372BB6B6CD | DF5D09EB-19F2-4938-95A9-F6372BB6B6CD |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("EmpresaCategoria", <table>) (1,2s)

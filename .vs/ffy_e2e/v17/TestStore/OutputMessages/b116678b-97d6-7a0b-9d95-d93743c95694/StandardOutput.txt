@@ -1,0 +1,57 @@
+Dado o cadastro de empresa como embarcadora em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaComoEmbarcadoraEmPre_Condicao() (0,0s)
+E o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,0s)
+E a oferta de carga restrita com valores padrão em pré-condição
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadraoEmPre_Condicao() (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Quando deletado a Empresa "RegressionFy Embarcadora Ltda"
+-> done: FretefyConfigCadastrosSteps.QuandoDeletadoAEmpresaEnvolvida("RegressionFy Emba...") (0,2s)
+E deletado a Empresa "BDD entrega 1"
+-> done: FretefyConfigCadastrosSteps.QuandoDeletadoAEmpresaEnvolvida("BDD entrega 1") (0,0s)
+E deletado a Empresa "RegressionFy Transportadora Ltda"
+-> done: FretefyConfigCadastrosSteps.QuandoDeletadoAEmpresaEnvolvida("RegressionFy Tran...") (0,0s)
+Dado a tela de cadastro de cargas
+-> done: FretefyCargaSteps.DadoATelaDeCadastroDeCargas() (4,2s)
+Então deve haver a mensagem na tela "Vamos cadastrar uma empresa, que servirá como origem padrão para cadastro de cargas" sem fechar
+-> done: DialogSteps.EntaoDeveHaverAMensagemNaTelaSemFechar("Vamos cadastrar u...") (0,7s)
+Quando acionado o botão "Não" da mensagem de alerta
+-> done: DialogSteps.QuandoAcionadoOBotaoDaMensagemDeAlerta("Não") (1,1s)
+Dado o módulo "Home"
+-> done: NavigateSteps.DadoOModulo("Home") (1,6s)
+E a tela de cadastro de cargas
+-> done: FretefyCargaSteps.DadoATelaDeCadastroDeCargas() (3,6s)
+Então deve haver a mensagem na tela "Vamos cadastrar uma empresa, que servirá como origem padrão para cadastro de cargas" sem fechar
+-> done: DialogSteps.EntaoDeveHaverAMensagemNaTelaSemFechar("Vamos cadastrar u...") (0,6s)
+Quando acionado o botão "Sim" da mensagem de alerta
+-> done: DialogSteps.QuandoAcionadoOBotaoDaMensagemDeAlerta("Sim") (1,1s)
+Então devem haver os valores para os campos
+  --- table step argument ---
+  | Documento          | Nome                          |
+  | 89.777.009/0001-17 | RegressionFy Embarcadora Ltda |
+-> done: ValueSteps.EntaoDevemHaverOsValoresParaOsCampos(<table>) (1,7s)
+Dado os valores para os campos
+  --- table step argument ---
+  | E-mail                     | [be] Endereço                                             | Telefone    |
+  | embarcadorabdd@fretefy.com | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | 41991657269 |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (3,3s)
+Quando acionar o botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (0,6s)
+Então deve haver a notificação na tela "Empresa cadastrada com sucesso!" sem fechar
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTelaSemFechar("Empresa cadastrad...") (0,6s)
+E devem haver os valores na tabela "Empresas"
+  --- table step argument ---
+  | *Id                                                                      | Email                      | EnderecoCidade | EnderecoUF | EnderecoLocalidade                                        | EnderecoGooglePlaceId       | Ativo | Tipo |
+  | (SELECT Id FROM Envolvidos where Nome = 'RegressionFy Embarcadora Ltda') | embarcadorabdd@fretefy.com | Curitiba       | PR         | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | True  | 2    |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Empresas", <table>) (0,1s)
+E devem haver os valores na tabela "Envolvidos"
+  --- table step argument ---
+  | *NomeCompleto                 | DocumentoNumero | RGNumero | RGOrgaoEmissor | RGUFEmissor | RGDataEmissao | TelefoneNumero | IE | Nome                          |
+  | RegressionFy Embarcadora Ltda | 89777009000117  |          |                |             |               | 41991657269    |    | RegressionFy Embarcadora Ltda |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Envolvidos", <table>) (0,1s)
+Então devem haver os valores para os campos
+  --- table step argument ---
+  | [Id]EmpresaEmbarcadora        | [Id]EnderecoEmbarcadora                                   |
+  | RegressionFy Embarcadora Ltda | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |
+-> done: ValueSteps.EntaoDevemHaverOsValoresParaOsCampos(<table>) (2,0s)

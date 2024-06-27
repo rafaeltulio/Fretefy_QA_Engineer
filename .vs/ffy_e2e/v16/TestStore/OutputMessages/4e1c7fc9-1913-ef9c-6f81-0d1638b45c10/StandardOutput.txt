@@ -1,0 +1,72 @@
+Dado o cadastro de Grupo de tarefas Padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeGrupoDeTarefasPadrao() (0,2s)
+Dado a contratação da oferta de carga restrita com valores padrão
+-> done: FretefyCargaSteps.DadoAContratacaoDaOfertaDeCargaRestritaComValoresPadrao() (2,3s)
+Quando atualizado o valor "(select Id from GrupoTarefa where Nome = 'Grupo tarefa BDD')" para o campo "GrupoTarefaId" na tabela "ContratacoesCargaRota" usando como filtro o campo "ContratacaoCargaId" e valor "(select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8'))"
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValor("(select Id from G...", "GrupoTarefaId", "ContratacoesCarga...", "ContratacaoCargaId", "(select Id from C...") (0,1s)
+Dado a tela de Acompanhamento de Carga para o código "R-26D5E8C8" via URL
+-> done: FretefyCargaSteps.DadoATelaDeAcompanhamentoDeCargaParaOCodigoViaURL("R-26D5E8C8") (9,8s)
+Quando selecionar a aba "Acompanhamento"
+-> done: FretefyCargaSteps.QuandoSelecionadoAAba("Acompanhamento") (0,7s)
+Então a timeline deve estar com a situação "Contratado" ativa
+-> done: ValueSteps.EntaoATimelineDeveEstarComASituacaoAtiva("Contratado") (2,0s)
+Quando marcar atividade "tarefa 1 sem foto" da "Coleta" como feita
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeComoFeita("tarefa 1 sem foto", "Coleta") (2,9s)
+Quando marcar atividade "tarefa 2 com foto" da "Coleta" com foto
+  --- table step argument ---
+  | [date] Data/hora | [f] Imagem        |
+  | 01/01/2000 01:00 | Files\testers.png |
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeDaComFoto("tarefa 2 com foto", "Coleta", <table>) (40,3s)
+Então deve haver a notificação na tela "Tarefa registrada com sucesso"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Tarefa registrada...") (2,4s)
+E devem haver os dados na tabela "ContratacoesCargaEvento"
+  --- table step argument ---
+  | *ContratacaoCargaId                                                                                                | *Descricao                 | TipoAcaoEvento | TipoEvento | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUf | LocalidadeLocalidade | LocalidadeGooglePlaceId | AnexoFileName | AnexoContentType | TarefaId                                                           |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 1 sem foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 1 sem foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 2 com foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 2 com foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | Lista de tarefas concluída | 1              | 2          |                    |                     |                  |              |                      |                         |               |                  |                                                                    |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("ContratacoesCarga...", <table>) (0,8s)
+E a timeline deve estar com a situação "Em andamento" ativa
+-> done: ValueSteps.EntaoATimelineDeveEstarComASituacaoAtiva("Em andamento") (0,6s)
+Quando deletado o registro "(select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8'))" do campo "ContratacaoCargaId" na tabela "ContratacoesCargaEvento"
+-> done: DataSteps.QuandoDeletadoORegistroDoCampoNaTabela("(select Id from C...", "ContratacaoCargaId", "ContratacoesCarga...") (0,0s)
+E marcar atividade "tarefa 1 sem foto" da "Parada" como feita
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeComoFeita("tarefa 1 sem foto", "Parada") (4,0s)
+E marcar atividade "tarefa 2 com foto" da "Parada" com foto
+  --- table step argument ---
+  | [date] Data/hora | [f] Imagem        |
+  | 01/01/2000 01:00 | Files\testers.png |
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeDaComFoto("tarefa 2 com foto", "Parada", <table>) (39,4s)
+Então deve haver a notificação na tela "Tarefa registrada com sucesso"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Tarefa registrada...") (1,7s)
+E a timeline deve estar com a situação "Em andamento" ativa
+-> done: ValueSteps.EntaoATimelineDeveEstarComASituacaoAtiva("Em andamento") (1,0s)
+Quando aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,1s)
+Então devem haver os dados na tabela "ContratacoesCargaEvento"
+  --- table step argument ---
+  | *ContratacaoCargaId                                                                                                | *Descricao                 | TipoAcaoEvento | TipoEvento | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUf | LocalidadeLocalidade | LocalidadeGooglePlaceId | AnexoFileName | AnexoContentType | TarefaId                                                           |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 1 sem foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 1 sem foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 2 com foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 2 com foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | Lista de tarefas concluída | 2              | 2          |                    |                     |                  |              |                      |                         |               |                  |                                                                    |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("ContratacoesCarga...", <table>) (1,0s)
+Quando deletado o registro "(select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8'))" do campo "ContratacaoCargaId" na tabela "ContratacoesCargaEvento"
+-> done: DataSteps.QuandoDeletadoORegistroDoCampoNaTabela("(select Id from C...", "ContratacaoCargaId", "ContratacoesCarga...") (0,0s)
+E marcar atividade "tarefa 1 sem foto" da "Entrega" como feita
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeComoFeita("tarefa 1 sem foto", "Entrega") (3,9s)
+E marcar atividade "tarefa 2 com foto" da "Entrega" com foto
+  --- table step argument ---
+  | [date] Data/hora | [f] Imagem        |
+  | 01/01/2000 01:00 | Files\testers.png |
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeDaComFoto("tarefa 2 com foto", "Entrega", <table>) (42,2s)
+Então deve haver a notificação na tela "Tarefa registrada com sucesso"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Tarefa registrada...") (2,5s)
+E a timeline deve estar com a situação "Entregue" ativa
+-> done: ValueSteps.EntaoATimelineDeveEstarComASituacaoAtiva("Entregue") (0,5s)
+E devem haver os dados na tabela "ContratacoesCargaEvento"
+  --- table step argument ---
+  | *ContratacaoCargaId                                                                                                | *Descricao                 | TipoAcaoEvento | TipoEvento | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUf | LocalidadeLocalidade | LocalidadeGooglePlaceId | AnexoFileName | AnexoContentType | TarefaId                                                           |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 1 sem foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 1 sem foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 2 com foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 2 com foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | Lista de tarefas concluída | 3              | 2          |                    |                     |                  |              |                      |                         |               |                  |                                                                    |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("ContratacoesCarga...", <table>) (0,6s)

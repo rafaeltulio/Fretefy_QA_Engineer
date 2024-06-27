@@ -1,0 +1,89 @@
+Dado a importação de pedidos em pré-condição
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosEmPre_Condicao() (0,0s)
+Quando atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a importação de pedidos
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidos() (1,3s)
+Dado a configuração da geração de carga como "Alocação"
+-> done: FretefyFormacaoSteps.DadoAConfiguracaoDaGeracaoDeCargaComo("Alocação") (0,0s)
+E uma minuta "Formar carga Alocação" com os pedidos
+  --- table step argument ---
+  | Documento   |
+  | 09071984A01 |
+  | 09071984A02 |
+  | 09071984A03 |
+-> done: FretefyFormacaoSteps.DadoUmaMinutaComOsPedidos("Formar carga Aloc...", <table>) (30,5s)
+Quando selecionar o conjunto de veículo "Truck Grade baixa"
+-> done: FretefyFormacaoSteps.QuandoSelecionarOConjuntoDeVeiculo("Truck Grade baixa") (2,5s)
+E acionar o botão "Formar carga"
+-> done: ActionSteps.QuandoAcionadoOBotao("Formar carga") (1,5s)
+Então deve abrir o drawer "Cargas formadas"
+-> done: ValueSteps.EntaoDeveAbrirODrawer("Cargas formadas") (4,6s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+Então devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento  | DhColeta            | DhEntrega           | CubagemTotal | MinutaId                                                          | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade  | DestinoLatitude | DestinoLocalidade    | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                         | OrigemLongitude | OrigemNomeEmpresa       | OrigemUF | DestinoEmpresaId | OrdenacaoMinuta | Observacoes | Agrupador | PedidoOrigemId | TipoLote | UnidadeNegocioId  |
+  | [obtem ownerId] | 09071984A01 | 02/11/2030 03:00:00 | 04/11/2030 03:00:00 | 10,000000    | (select Id from minuta where Descricao = 'Formar carga Alocação') | 1562,000  | 1          | D95F43C4-8B4D-4904-9A32-C497F4BAE02B | 1500,00     | Cascalho Rico  | -18,57699       | R.Arédio Santos, 111 | -47,87559        |                    | MG        | Curitiba     | -25,44372      | R.Pasteur, 463 - Batel, Curitiba - PR, 80250-080, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                  | 1               |             |           |                | false    | [obtem unidadeid] |
+  | [obtem ownerId] | 09071984A02 | 03/11/2030 20:53:00 | 04/11/2030 16:00:00 | 15,000000    | (select Id from minuta where Descricao = 'Formar carga Alocação') | 2800,000  | 3          | 287C7DA9-1ED8-4B69-9E9C-B3B97F3C35C1 | 2600,00     | Belo horizonte | -19,91319       | Av.Oiapoque, 156     | -43,93922        |                    | MG        | Curitiba     | -25,44372      | R.Pasteur, 463 - Batel, Curitiba - PR, 80250-080, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                  | 2               |             |           |                | false    | [obtem unidadeid] |
+  | [obtem ownerId] | 09071984A03 | 03/11/2030 20:54:00 |                     | 12,000000    | (select Id from minuta where Descricao = 'Formar carga Alocação') | 4038,000  | 5          | A49C1920-99DF-4AF9-8600-B85A19827BAF | 3700,00     | Belo horizonte | -19,92237       | R.Rio Grande do Sul  | -43,94642        |                    | MG        | Curitiba     | -25,44372      | R.Pasteur, 463 - Batel, Curitiba - PR, 80250-080, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                  | 3               |             |           |                | false    | [obtem unidadeid] |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (1,5s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | Situacao | VeiculoConjuntoId                                                      | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao             | UnidadeNegocioId  |
+  | [obtem ownerId] | 2        | (select Id from VeiculoConjunto where Descricao = 'Truck Grade baixa') | 8400,00   | 37,00        | 7800,00    | 64,00           | 60,00        | Formar carga Alocação | [obtem unidadeid] |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,2s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                                           | Codigo | Descricao | Cubagem | Peso | Quantidade | TipoAcondicionamentoId |
+  | select Id from PedidoItem where PedidoId in (select Id from pedido where ownerId = [obtem ownerId]) |        |           |         |      |            |                        |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (4,6s)
+Dado a conexão "fretefy" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("fretefy") (0,0s)
+Então os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCarga"
+  --- table step argument ---
+  | *Id                                                                                            | Situacao | Visibilidade | DhColeta | DhEntrega | MotivoDesativacaoId | DhCancelamento | DhDesativacao | DhFinalizacao | CustoEstimado | UnidadeNegocioId                                            |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 1        | 1            |          |           |                     |                |               |               | 0,00          | (select Id from UnidadesNegocio where Descricao = 'Padrão') |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCarga", <table>) (0,2s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaCarga"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                 | Modalidade | Peso     | Volume    | UnidadeVolume | TipoCargaId                                           | TipoNaturezaCargaId | CodIdentificador      |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 1          | 8400,000 | 37,000000 | 7             | (select Id from Tipos where Descricao = 'Palete PBR') |                     | Formar carga Alocação |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaCarga", <table>) (0,2s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaVeiculo"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                 | TipoPessoa | ApenasCavaloMecanico |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 0          | false                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaVeiculo", <table>) (0,0s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaRota"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                 | *Ordem | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUF | LocalidadeLocalidade                                     | LocalidadeGooglePlaceId | Rota | DhInicio            | DhFim               | Motivo | EmpresaId                                                                                        | Observacao | Documento   | GrupoTarefaId | Componentes | DadosBaseFrete |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 0      | -25,44372          | -49,27898           | Curitiba         | PR           | R.PASTEUR, 463 - BATEL, CURITIBA - PR, 80250-080, BRASIL |                         | 1    | 02/11/2030 03:00:00 |                     | 1      | (select Id from envolvidos where nome = 'Empresa envolvida Razão' and ownerId = [obtem ownerId]) |            |             |               | []          |                |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 1      | -18,57699          | -47,87559           | Cascalho Rico    | MG           | R.Arédio Santos, 111                                     |                         | 2    |                     | 04/11/2030 03:00:00 | 3      |                                                                                                  |            | 09071984A01 |               | []          |                |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 2      | -19,91319          | -43,93922           | Belo horizonte   | MG           | Av.Oiapoque, 156                                         |                         | 2    |                     | 04/11/2030 16:00:00 | 3      |                                                                                                  |            | 09071984A02 |               | []          |                |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 3      | -19,92237          | -43,94642           | Belo horizonte   | MG           | R.Rio Grande do Sul                                      |                         | 3    |                     |                     | 2      |                                                                                                  |            | 09071984A03 |               | []          |                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaRota", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamento"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                 | ValorTarifa | PedagioInclusoTarifa | ValorAdiantamento | TipoAdiantamento | AceitaContraProposta | FormaPagamento | LivreTaxaDescarga | LivreTaxaCarga | TipoTarifaCargaId                    |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') | 0,00        | false                |                   |                  | false                | 3              | false             | false          | 25272F18-A53F-4F0D-A84B-F56688DBA202 |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (0,2s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposCartao"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                 | TipoCartaoId |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') |              |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (0,0s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposBancoDeposito"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                 | TipoBancoDepositoId | OfertaCargaId1 |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') |                     |                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (0,0s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertaCargaContato"
+  --- table step argument ---
+  | *OfertaCargaId                                                                                 | ContatoId |
+  | (Select ofertaCargaId from OfertasCargaCarga where CodIdentificador = 'Formar carga Alocação') |           |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertaCargaContato", <table>) (0,0s)

@@ -1,0 +1,45 @@
+Dado a importação de pedidos em pré-condição
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosEmPre_Condicao() (0,0s)
+Quando atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a importação de pedidos com produtos via excel
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosComProdutosViaExcel() (22,8s)
+E a rotina "Formação de carga|Pedidos"
+-> done: NavigateSteps.DadoARotina("Formação de carga...") (4,4s)
+Quando "Editar" o registro da grid com valor "09071984B03"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Editar", "09071984B03") (3,9s)
+E "Remover" o registro da grid com valor "BDD3"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Remover", "BDD3") (14,8s)
+E "Remover" o registro da grid com valor "BDD2"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Remover", "BDD2") (13,7s)
+E "Remover" o registro da grid com valor "BDD1"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Remover", "BDD1") (13,5s)
+Então o título do Drawer deve ser "Pedidos"
+-> done: NavigateSteps.EntaoOTituloDaDialogDeveSer("Pedidos") (1,0s)
+Dado o valor "[hoje]" para o campo "[date] Coleta"
+-> done: ValueSteps.DadoOValorParaOCampo("[hoje]", "[date] Coleta") (0,4s)
+Quando clicar no botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (1,2s)
+Então deve haver a notificação na tela "Alteração efetuada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Alteração efetuad...") (0,7s)
+E devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento  | DhColeta | DhEntrega | CubagemTotal | MinutaId | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade | DestinoLatitude | DestinoLocalidade                                                     | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                                               | OrigemLongitude | OrigemNomeEmpresa | OrigemUF | OrdenacaoMinuta | Observacoes | Agrupador |
+  | [obtem ownerId] | 09071984B03 | [hoje]   |           | 14,000000    |          | 6514,000  | 9          | 0A2A19B3-37FF-4356-B2D3-C6B75A7742DD | 5900,00     | Betim         | -19,96705       | Av. Edmeia Matos Lazzarotti, 335 - Decamao, Betim - MG, 32600, Brasil | -44,20985        |                    | MG        | Registro     | -24,49682      | Av. Clara Gianotti de Souza, 429 - Vila Tupy, Registro - SP, 11900-000, Brasil | -47,84793       |                   | SP       |                 |             |           |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (0,4s)
+E não devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                            | *Codigo | Descricao      | Cubagem  | Peso  | Quantidade | TipoAcondicionamentoId               |
+  | select Id from pedido where Documento = '09071984B03' and ownerId =  [obtem ownerId] | BDD3    | Produto BDD B3 | 2,000000 | 2,000 | 20         | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+  | select Id from pedido where Documento = '09071984B03' and ownerId =  [obtem ownerId] | BDD2    | Produto BDD B2 | 1,123456 | 1,123 | 10         | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+  | select Id from pedido where Documento = '09071984B03' and ownerId =  [obtem ownerId] | BDD1    | Produto BDD B1 | 0,123456 | 0,123 | 1          | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+-> done: DataSteps.EntaoNaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (0,3s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | CargaGeradaId | Situacao | VeiculoConjuntoId | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao | DhCargaGerada | Distancia | Duracao |
+  | [obtem ownerId] |               |          |                   |           |              |            |                 |              |           |               |           |         |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,2s)

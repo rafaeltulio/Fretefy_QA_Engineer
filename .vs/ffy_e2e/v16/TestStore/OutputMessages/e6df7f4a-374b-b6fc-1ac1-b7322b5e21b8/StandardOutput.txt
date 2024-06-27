@@ -1,0 +1,38 @@
+Dado a importação de pedidos em pré-condição
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosEmPre_Condicao() (0,0s)
+Quando atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Quando deletados todos os pedidos
+-> done: FretefyFormacaoSteps.QuandoDeletadosTodosOsPedidos() (0,2s)
+Dado a rotina "Formação de carga|Pedidos"
+-> done: NavigateSteps.DadoARotina("Formação de carga...") (4,9s)
+Quando acionar o botão "Cadastrar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Cadastrar") (1,2s)
+Dados os valores para os campos
+  --- table step argument ---
+  | Documento        | [date] Coleta | [date] Entrega | [s] Empresa de origem   | [be] Destino         | Cubagem  | Peso     | [mask] Valor  | Quantidade | [s] Acondicionamento | Observações                                                                                                                                            |
+  | 09071984Manual01 | [hoje]        | [hoje]         | Empresa envolvida Razão | Imbituba, SC, Brasil | 0,123456 | 0,123456 | 12.345.678,99 | 12345678   | Milheiro             | Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. Em pé sem cair, deitado sem dormir, sentado sem cochi |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (13,8s)
+Quando acionar o botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (0,9s)
+Então deve haver a notificação na tela "Pedido cadastrado com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Pedido cadastrado...") (0,6s)
+E devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento       | DhColeta | DhEntrega | CubagemTotal | MinutaId | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade | DestinoLocalidade    | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                          | OrigemLongitude | OrigemNomeEmpresa       | OrigemUF | OrdenacaoMinuta | DestinoEmpresaId | Observacoes                                                                                                                                            | Agrupador | PedidoOrigemId | TipoLote | UnidadeNegocioId  |
+  | [obtem ownerId] | 09071984Manual01 | [hoje]   | [hoje]    | 0,123456     |          | 0,123     | 12345678   | 3be6869e-9907-4e3e-8863-259a9a784673 | 12345678,99 | Imbituba      | Imbituba, SC, Brasil |                    | SC        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                 |                  | Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. Em pé sem cair, deitado sem dormir, sentado sem cochi |           |                | false    | [obtem unidadeid] |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (0,7s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                                           | Codigo | Descricao | Cubagem | Peso | Quantidade | TipoAcondicionamentoId |
+  | select Id from PedidoItem where PedidoId in (select Id from pedido where ownerId = [obtem ownerId]) |        |           |         |      |            |                        |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (4,7s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | CargaGeradaId | Situacao | VeiculoConjuntoId | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao | DhCargaGerada | Distancia | Duracao |
+  | [obtem ownerId] |               |          |                   |           |              |            |                 |              |           |               |           |         |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,3s)

@@ -1,0 +1,152 @@
+Dado a importação de pedidos
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidos() (1,7s)
+E a rotina "Formação de carga|Formar cargas"
+-> done: NavigateSteps.DadoARotina("Formação de carga...") (4,0s)
+Quando selecionado o tipo de visualização "Simples"
+-> done: FretefyFormacaoSteps.QuandoSelecionadoOTipoDeVisualizacao("Simples") (3,6s)
+Quando atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado os valores para o conjunto de veículo "VLC Baú" nas configurações
+  --- table step argument ---
+  | Peso   | Cubagem |
+  | 999,99 | 999,99  |
+-> done: FretefyFormacaoSteps.DadoOsValoresParaOConjuntoDeVeiculoNasConfiguracoes("VLC Baú", <table>) (14,8s)
+Então devem haver os dados na tabela "VeiculoConjuntoConfig"
+  --- table step argument ---
+  | *OwnerId        | *VeiculoConjuntoId                                                                     | Ignorado | CubagemSuportada | PesoSuportado |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'VLC Baú')                           | false    | 999,99           | 999,99        |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Toco Grade baixa')                  | false    | 44,00            | 6,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Grade baixa (6 eixos)') | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Grade baixa (9 eixos)')      | false    | 150,00           | 74,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = '3/4 Baú')                           | false    | 29,00            | 3,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitruck Grade baixa')               | false    | 58,00            | 20,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Baú (5 eixos)')          | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Baú (6 eixos)')         | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Baú (6 eixos)')          | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Grade baixa (5 eixos)')     | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Sider (5 eixos)')           | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Sider (7 eixos)')       | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Baú (5 eixos)')             | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Sider (6 eixos)')       | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Sider (7 eixos)')            | false    | 150,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Sider (7 eixos)')        | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Baú (7 eixos)')              | false    | 150,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Truck Grade baixa')                 | false    | 58,00            | 14,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Sider (4 eixos)')           | false    | 110,00           | 33,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Grade baixa (7 eixos)') | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Sider (6 eixos)')           | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Grade baixa (7 eixos)')      | false    | 150,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Grade baixa (7 eixos)')  | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Sider (9 eixos)')            | false    | 150,00           | 74,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Baú (7 eixos)')         | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Baú (4 eixos)')             | false    | 110,00           | 33,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Grade baixa (4 eixos)')     | false    | 110,00           | 33,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Sider (5 eixos)')        | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Baú (7 eixos)')          | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitruck Baú')                       | false    | 58,00            | 20,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Baú (6 eixos)')             | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Grade baixa (6 eixos)')  | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Toco Baú')                          | false    | 44,00            | 6,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Truck Baú')                         | false    | 58,00            | 14,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Baú (9 eixos)')              | false    | 150,00           | 74,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Grade baixa (5 eixos)')  | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Grade baixa (6 eixos)')     | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = '3/4 Grade baixa')                   | false    | 29,00            | 3,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Sider (6 eixos)')        | false    | 110,00           | 46,50         |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("VeiculoConjuntoCo...", <table>) (4,0s)
+Então devem haver os dados na tabela "VeiculoConjunto"
+  --- table step argument ---
+  | *Descricao                        | TipoVeiculoId                        | TipoCarroceriaId                     | CubagemSuportada | PesoSuportado |
+  | VLC Baú                           | 9F61A2D8-1F04-417F-BE7F-7EB766A6305B | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 11,00            | 1,50          |
+  | Toco Grade baixa                  | 1F3086CE-DF12-4F8B-B999-8259E56AB0CF | 0F47DE15-F44F-403F-8805-034CA0777112 | 44,00            | 6,00          |
+  | Carreta-6x2 Grade baixa (6 eixos) | EFCA0D74-CE2B-4C50-9A05-E7C433293825 | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 46,50         |
+  | Bitrem Grade baixa (9 eixos)      | FAA1B85C-29C7-4619-89D3-3DECAF1CBE21 | 0F47DE15-F44F-403F-8805-034CA0777112 | 150,00           | 74,00         |
+  | 3/4 Baú                           | AEE106DA-EC81-4936-9474-16B2ED91122A | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 29,00            | 3,00          |
+  | Bitruck Grade baixa               | 2E40BAE3-7CE6-4095-B9CA-2E470F6F59E9 | 0F47DE15-F44F-403F-8805-034CA0777112 | 58,00            | 20,00         |
+  | Carreta-LS Baú (5 eixos)          | 3EA59190-985C-4E6E-8932-A620F39EA47F | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 41,50         |
+  | Carreta-6x2 Baú (6 eixos)         | EFCA0D74-CE2B-4C50-9A05-E7C433293825 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 46,50         |
+  | Carreta-LS Baú (6 eixos)          | 3EA59190-985C-4E6E-8932-A620F39EA47F | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 46,50         |
+  | Carreta Grade baixa (5 eixos)     | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 41,50         |
+  | Carreta Sider (5 eixos)           | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 41,50         |
+  | Carreta-6x2 Sider (7 eixos)       | EFCA0D74-CE2B-4C50-9A05-E7C433293825 | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 57,00         |
+  | Carreta Baú (5 eixos)             | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 41,50         |
+  | Carreta-6x2 Sider (6 eixos)       | EFCA0D74-CE2B-4C50-9A05-E7C433293825 | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 46,50         |
+  | Bitrem Sider (7 eixos)            | FAA1B85C-29C7-4619-89D3-3DECAF1CBE21 | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 150,00           | 57,00         |
+  | Carreta-LS Sider (7 eixos)        | 3EA59190-985C-4E6E-8932-A620F39EA47F | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 57,00         |
+  | Bitrem Baú (7 eixos)              | FAA1B85C-29C7-4619-89D3-3DECAF1CBE21 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 150,00           | 57,00         |
+  | Truck Grade baixa                 | 435929CA-9ECF-4283-8859-E67E6639AF0B | 0F47DE15-F44F-403F-8805-034CA0777112 | 58,00            | 14,00         |
+  | Carreta Sider (4 eixos)           | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 33,00         |
+  | Carreta-6x2 Grade baixa (7 eixos) | EFCA0D74-CE2B-4C50-9A05-E7C433293825 | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 57,00         |
+  | Carreta Sider (6 eixos)           | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 46,50         |
+  | Bitrem Grade baixa (7 eixos)      | FAA1B85C-29C7-4619-89D3-3DECAF1CBE21 | 0F47DE15-F44F-403F-8805-034CA0777112 | 150,00           | 57,00         |
+  | Carreta-LS Grade baixa (7 eixos)  | 3EA59190-985C-4E6E-8932-A620F39EA47F | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 57,00         |
+  | Bitrem Sider (9 eixos)            | FAA1B85C-29C7-4619-89D3-3DECAF1CBE21 | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 150,00           | 74,00         |
+  | Carreta-6x2 Baú (7 eixos)         | EFCA0D74-CE2B-4C50-9A05-E7C433293825 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 57,00         |
+  | Carreta Baú (4 eixos)             | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 33,00         |
+  | Carreta Grade baixa (4 eixos)     | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 33,00         |
+  | Carreta-LS Sider (5 eixos)        | 3EA59190-985C-4E6E-8932-A620F39EA47F | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 41,50         |
+  | Carreta-LS Baú (7 eixos)          | 3EA59190-985C-4E6E-8932-A620F39EA47F | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 57,00         |
+  | Bitruck Baú                       | 2E40BAE3-7CE6-4095-B9CA-2E470F6F59E9 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 58,00            | 20,00         |
+  | Carreta Baú (6 eixos)             | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 110,00           | 46,50         |
+  | Carreta-LS Grade baixa (6 eixos)  | 3EA59190-985C-4E6E-8932-A620F39EA47F | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 46,50         |
+  | Toco Baú                          | 1F3086CE-DF12-4F8B-B999-8259E56AB0CF | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 44,00            | 6,00          |
+  | Truck Baú                         | 435929CA-9ECF-4283-8859-E67E6639AF0B | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 58,00            | 14,00         |
+  | Bitrem Baú (9 eixos)              | FAA1B85C-29C7-4619-89D3-3DECAF1CBE21 | DBDE88C0-DAAF-492E-9024-53F822CB0609 | 150,00           | 74,00         |
+  | Carreta-LS Grade baixa (5 eixos)  | 3EA59190-985C-4E6E-8932-A620F39EA47F | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 41,50         |
+  | Carreta Grade baixa (6 eixos)     | D4693A96-D64F-49F9-BCDE-45C996AFD3E7 | 0F47DE15-F44F-403F-8805-034CA0777112 | 110,00           | 46,50         |
+  | 3/4 Grade baixa                   | AEE106DA-EC81-4936-9474-16B2ED91122A | 0F47DE15-F44F-403F-8805-034CA0777112 | 29,00            | 3,00          |
+  | Carreta-LS Sider (6 eixos)        | 3EA59190-985C-4E6E-8932-A620F39EA47F | F43C03FC-D6EE-4D5D-B32F-AF9F96B40E9B | 110,00           | 46,50         |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("VeiculoConjunto", <table>) (4,3s)
+Quando clicar no botão "Configurações"
+-> done: ActionSteps.QuandoAcionadoOBotao("Configurações") (2,8s)
+E clicar no botão "Restaurar valores padrão"
+-> done: ActionSteps.QuandoAcionadoOBotao("Restaurar valores...") (0,6s)
+Então deve haver a mensagem na tela "As informações de peso, cubagem e visibilidade serão restauradas para o padrão do sistema" sem fechar
+-> done: DialogSteps.EntaoDeveHaverAMensagemNaTelaSemFechar("As informações de...") (0,6s)
+Quando acionar o botão "Restaurar valores" da mensagem
+-> done: DialogSteps.QuandoAcionarOBotaoDaDialog("Restaurar valores") (0,9s)
+Então deve haver a notificação na tela "Valores padrão restaurados"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Valores padrão re...") (0,1s)
+E não devem haver os dados na tabela "VeiculoConjuntoConfig"
+  --- table step argument ---
+  | *OwnerId        | *VeiculoConjuntoId                                                                     | Ignorado | CubagemSuportada | PesoSuportado |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'VLC Baú')                           | false    | 999,99           | 999,99        |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Toco Grade baixa')                  | false    | 44,00            | 6,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Grade baixa (6 eixos)') | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Grade baixa (9 eixos)')      | false    | 150,00           | 74,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = '3/4 Baú')                           | false    | 29,00            | 3,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitruck Grade baixa')               | false    | 58,00            | 20,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Baú (5 eixos)')          | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Baú (6 eixos)')         | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Baú (6 eixos)')          | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Grade baixa (5 eixos)')     | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Sider (5 eixos)')           | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Sider (7 eixos)')       | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Baú (5 eixos)')             | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Sider (6 eixos)')       | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Sider (7 eixos)')            | false    | 150,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Sider (7 eixos)')        | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Baú (7 eixos)')              | false    | 150,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Truck Grade baixa')                 | false    | 58,00            | 14,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Sider (4 eixos)')           | false    | 110,00           | 33,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Grade baixa (7 eixos)') | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Sider (6 eixos)')           | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Grade baixa (7 eixos)')      | false    | 150,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Grade baixa (7 eixos)')  | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Sider (9 eixos)')            | false    | 150,00           | 74,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-6x2 Baú (7 eixos)')         | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Baú (4 eixos)')             | false    | 110,00           | 33,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Grade baixa (4 eixos)')     | false    | 110,00           | 33,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Sider (5 eixos)')        | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Baú (7 eixos)')          | false    | 110,00           | 57,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitruck Baú')                       | false    | 58,00            | 20,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Baú (6 eixos)')             | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Grade baixa (6 eixos)')  | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Toco Baú')                          | false    | 44,00            | 6,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Truck Baú')                         | false    | 58,00            | 14,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Bitrem Baú (9 eixos)')              | false    | 150,00           | 74,00         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Grade baixa (5 eixos)')  | false    | 110,00           | 41,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta Grade baixa (6 eixos)')     | false    | 110,00           | 46,50         |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = '3/4 Grade baixa')                   | false    | 29,00            | 3,00          |
+  | [obtem ownerId] | (SELECT Id FROM VeiculoConjunto where Descricao = 'Carreta-LS Sider (6 eixos)')        | false    | 110,00           | 46,50         |
+-> done: DataSteps.EntaoNaoDevemHaverOsValoresNaTabela("VeiculoConjuntoCo...", <table>) (5,1s)

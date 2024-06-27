@@ -1,0 +1,41 @@
+Dado a importação de pedidos em pré-condição
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosEmPre_Condicao() (0,0s)
+Quando atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a importação de pedidos com produtos via excel
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosComProdutosViaExcel() (9,7s)
+Quando selecionado o tipo de visualização "Simples"
+-> done: FretefyFormacaoSteps.QuandoSelecionadoOTipoDeVisualizacao("Simples") (4,3s)
+Então devem haver "3" registros na tabela "Pedido" usando como filtro o campo "OwnerId" e valor "[obtem ownerId]"
+-> done: DataSteps.EntaoDevemHaverRegistroNaTabelaUsandoComoFiltroOCampoEValor("3", "Pedido", "OwnerId", "[obtem ownerId]") (0,0s)
+Quando clicar para atualizar a página
+-> done: NavigateSteps.QuandoClicarParaAtualizarAPagina() (5,2s)
+Então deve haver "3" pedidos na lista
+-> done: FretefyFormacaoSteps.EntaoDeveHaverPedidosNaLista("3") (0,0s)
+E devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento  | DhColeta            | DhEntrega           | CubagemTotal | MinutaId | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade | DestinoLatitude | DestinoLocalidade                                                     | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                                               | OrigemLongitude | OrigemNomeEmpresa       | OrigemUF | OrdenacaoMinuta | Observacoes          | Agrupador | PedidoOrigemId | TipoLote | UnidadeNegocioId  | Ativo | LoteDistribuido |
+  | [obtem ownerId] | 09071984B01 | 02/11/2020 03:00:00 | 04/11/2020 03:00:00 | 10,000000    |          | 1562,000  | 1          | D95F43C4-8B4D-4904-9A32-C497F4BAE02B | 1500,00     | Cascalho Rico | -18,57699       | R. Arédio Santos, 111 - Cascalho Rico, MG, 38460-000, Brasil          | -47,87559        |                    | MG        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil                      | -49,27898       | Empresa envolvida Razão | PR       |                 | Item perigoso        |           |                | false    | [obtem unidadeid] | true  | false           |
+  | [obtem ownerId] | 09071984B02 | 03/11/2020 20:55:00 |                     | 13,000000    |          | 5276,000  | 7          | F7583A31-D353-4334-86CE-2B98D217BEE2 | 4800,00     | Curitiba      | -25,44372       | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil             | -49,27898        |                    | PR        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil                      | -49,27898       | Empresa envolvida Razão | PR       |                 | Entregar na portaria |           |                | false    | [obtem unidadeid] | true  | false           |
+  | [obtem ownerId] | 09071984B03 | 03/11/2020 20:56:00 |                     | 14,000000    |          | 6514,000  | 9          | 0A2A19B3-37FF-4356-B2D3-C6B75A7742DD | 5900,00     | Betim         | -19,96705       | Av. Edmeia Matos Lazzarotti, 335 - Decamao, Betim - MG, 32600, Brasil | -44,20985        |                    | MG        | Registro     | -24,49682      | Av. Clara Gianotti de Souza, 429 - Vila Tupy, Registro - SP, 11900-000, Brasil | -47,84793       |                         | SP       |                 |                      |           |                | false    | [obtem unidadeid] | true  | false           |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (1,6s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                            | *Codigo | Descricao      | Cubagem  | Peso    | Quantidade | TipoAcondicionamentoId               |
+  | select Id from pedido where Documento = '09071984B01' and ownerId =  [obtem ownerId] | 1592B3C | Produto BDD A1 | 3,000000 | 150,000 | 15         | B8EB87BC-E39B-4799-993A-DD89AC93AF06 |
+  | select Id from pedido where Documento = '09071984B01' and ownerId =  [obtem ownerId] | 168C345 | Produto BDD A2 | 4,000000 | 500,000 | 23         | A49C1920-99DF-4AF9-8600-B85A19827BAF |
+  | select Id from pedido where Documento = '09071984B01' and ownerId =  [obtem ownerId] | Z3P9012 | Produto BDD A3 | 7,590000 | 785,920 | 36         | B8EB87BC-E39B-4799-993A-DD89AC93AF06 |
+  | select Id from pedido where Documento = '09071984B03' and ownerId =  [obtem ownerId] | BDD4    | Produto BDD B4 | 3,000000 | 3,000   | 30         | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+  | select Id from pedido where Documento = '09071984B03' and ownerId =  [obtem ownerId] | BDD3    | Produto BDD B3 | 2,000000 | 2,000   | 20         | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+  | select Id from pedido where Documento = '09071984B03' and ownerId =  [obtem ownerId] | BDD2    | Produto BDD B2 | 1,123456 | 1,123   | 10         | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+  | select Id from pedido where Documento = '09071984B03' and ownerId =  [obtem ownerId] | BDD1    | Produto BDD B1 | 0,123456 | 0,123   | 1          | 87DB0F2B-F454-41FE-AFBE-C79C35506862 |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (1,2s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | CargaGeradaId | Situacao | VeiculoConjuntoId | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao | DhCargaGerada | Distancia | Duracao | UnidadeNegocioId |
+  | [obtem ownerId] |               |          |                   |           |              |            |                 |              |           |               |           |         |                  |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,2s)

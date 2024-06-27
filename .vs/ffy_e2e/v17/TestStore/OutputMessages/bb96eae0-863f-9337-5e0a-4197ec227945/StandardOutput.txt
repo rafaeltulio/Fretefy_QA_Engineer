@@ -1,0 +1,56 @@
+Dado a importação de pedidos em pré-condição
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosEmPre_Condicao() (0,0s)
+Quando atualizado o valor "1" para o campo "Visibilidade" na tabela "FormacaoPreferencia" usando como filtro o campo "OwnerId" e valor "[obterOwner]" em pré-condição
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValorEmPre_Condicao("1", "Visibilidade", "FormacaoPreferencia", "OwnerId", "[obterOwner]") (0,0s)
+Dado a conexão "Formação" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("Formação") (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a importação de pedidos com produtos via excel
+-> done: FretefyFormacaoSteps.DadoAImportacaoDePedidosComProdutosViaExcel() (9,7s)
+Dado a rotina "Formação de carga|Pedidos"
+-> done: NavigateSteps.DadoARotina("Formação de carga...") (3,8s)
+Quando "Editar" o registro da grid com valor "09071984B01"
+-> done: GridSteps.QuandoORegistroDaGridComValor("Editar", "09071984B01") (3,0s)
+Então devem haver os valores para os campos
+  --- table step argument ---
+  | Cubagem | Peso  | Quantidade |
+  | 10      | 1.562 | 1          |
+-> done: ValueSteps.EntaoDevemHaverOsValoresParaOsCampos(<table>) (2,1s)
+Dado o valor "checado" para o campo "[c] Somar valor dos itens"
+-> done: ValueSteps.DadoOValorParaOCampo("checado", "[c] Somar valor d...") (0,8s)
+Então devem haver os valores para os campos
+  --- table step argument ---
+  | Cubagem | Peso     | Quantidade |
+  | 14,59   | 1.435,92 | 74         |
+-> done: ValueSteps.EntaoDevemHaverOsValoresParaOsCampos(<table>) (2,0s)
+E os campos devem estar "desabilitados"
+  --- table step argument ---
+  | Cubagem | Peso | Quantidade |
+  |         |      |            |
+-> done: ValueSteps.EntaoOsCamposDevemEstar("desabilitados", <table>) (0,4s)
+Dados o valor "[hoje]" para o campo "[date] Coleta"
+-> done: ValueSteps.DadoOValorParaOCampo("[hoje]", "[date] Coleta") (0,2s)
+Dados o valor "[hoje]" para o campo "[date] Entrega"
+-> done: ValueSteps.DadoOValorParaOCampo("[hoje]", "[date] Entrega") (0,2s)
+Quando clicar no botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (1,0s)
+Então deve haver a notificação na tela "Alteração efetuada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Alteração efetuad...") (0,4s)
+E devem haver os dados na tabela "Pedido"
+  --- table step argument ---
+  | *OwnerId        | *Documento  | DhColeta | DhEntrega | CubagemTotal | MinutaId | PesoTotal | Quantidade | TipoAcondicionamentoId               | ValorPedido | DestinoCidade | DestinoLatitude | DestinoLocalidade                                            | DestinoLongitude | DestinoNomeEmpresa | DestinoUF | OrigemCidade | OrigemLatitude | OrigemLocalidade                                          | OrigemLongitude | OrigemNomeEmpresa       | OrigemUF | OrdenacaoMinuta | Observacoes   | Agrupador |
+  | [obtem ownerId] | 09071984B01 | [hoje]   | [hoje]    | 14,590000    |          | 1435,920  | 74         | D95F43C4-8B4D-4904-9A32-C497F4BAE02B | 1500,00     | Cascalho Rico | -18,57699       | R. Arédio Santos, 111 - Cascalho Rico, MG, 38460-000, Brasil | -47,87559        |                    | MG        | Curitiba     | -25,44372      | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | -49,27898       | Empresa envolvida Razão | PR       |                 | Item perigoso |           |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Pedido", <table>) (0,5s)
+E devem haver os dados na tabela "PedidoItem"
+  --- table step argument ---
+  | *PedidoId                                                                            | *Codigo | Descricao      | Cubagem  | Peso    | Quantidade | TipoAcondicionamentoId               |
+  | select Id from pedido where Documento = '09071984B01' and ownerId =  [obtem ownerId] | 1592B3C | Produto BDD A1 | 3,000000 | 150,000 | 15         | B8EB87BC-E39B-4799-993A-DD89AC93AF06 |
+  | select Id from pedido where Documento = '09071984B01' and ownerId =  [obtem ownerId] | 168C345 | Produto BDD A2 | 4,000000 | 500,000 | 23         | A49C1920-99DF-4AF9-8600-B85A19827BAF |
+  | select Id from pedido where Documento = '09071984B01' and ownerId =  [obtem ownerId] | Z3P9012 | Produto BDD A3 | 7,590000 | 785,920 | 36         | B8EB87BC-E39B-4799-993A-DD89AC93AF06 |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("PedidoItem", <table>) (0,3s)
+E devem haver os dados na tabela "Minuta"
+  --- table step argument ---
+  | *OwnerId        | CargaGeradaId | Situacao | VeiculoConjuntoId | PesoTotal | CubagemTotal | ValorTotal | OcupacaoCubagem | OcupacaoPeso | Descricao | DhCargaGerada | Distancia | Duracao |
+  | [obtem ownerId] |               |          |                   |           |              |            |                 |              |           |               |           |         |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("Minuta", <table>) (0,2s)

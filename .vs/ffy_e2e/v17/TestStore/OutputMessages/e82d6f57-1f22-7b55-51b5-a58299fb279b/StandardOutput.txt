@@ -1,0 +1,90 @@
+Dado o cadastro de empresa como embarcadora em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaComoEmbarcadoraEmPre_Condicao() (0,0s)
+E o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,0s)
+E a oferta de carga restrita com valores padrão em pré-condição
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadraoEmPre_Condicao() (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a tela de cadastro de cargas
+-> done: FretefyCargaSteps.DadoATelaDeCadastroDeCargas() (4,1s)
+E o valor "Alocação" para o campo "[gb] Transportador determinado por"
+-> done: ValueSteps.DadoOValorParaOCampo("Alocação", "[gb] Transportado...") (0,2s)
+E o valor "marcado" para o campo "[c] Apenas cavalo mecânico"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] Apenas cavalo...") (0,7s)
+E o valor "[data atual]" para o campo "[date]Data de coleta¹"
+-> done: ValueSteps.DadoOValorParaOCampo("[data atual]", "[date]Data de col...") (0,2s)
+E as entregas da carga
+  --- table step argument ---
+  | Endereço             | [date]Previsão de entrega¹ | Documento     |
+  | Rua pasteur, 463     | [data atual]               | ABC           |
+  | Curitiba             | [data atual +1]            | ABC1          |
+  | Paranaguá            | [data atual +2]            | ABC12         |
+  | Itapoá               | [data atual +3]            | ABC123        |
+  | Joinvile             | [data atual +4]            | ABC123        |
+  | Barra Velha          | [data atual +5]            | ABC12345      |
+  | São Francisco do Sul | [data atual +4]            | ABC123456     |
+  | Itajaí               | [data atual +3]            | ABC1234567    |
+  | Balneario Camburiú   | [data atual +2]            | ABC12345678   |
+  | Florianópolis        | [data atual +1]            | ABC123456789  |
+  | Imbituba             | [data atual]               | ABC123456789A |
+-> done: FretefyCargaSteps.DadoAsEntregasDaCarga(<table>) (60,2s)
+Quando aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,2s)
+E clicar no botão "Adicionar carga"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar carga") (1,2s)
+E aguardar o carregamento da página "Carga R-"
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina("Carga R-") (0,1s)
+Então a URL da pagina deve conter "/encontrar-veiculo)"
+-> done: NavigateSteps.EntaoAURLDaPaginaDeveConter("/encontrar-veiculo)") (2,1s)
+Então os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCarga"
+  --- table step argument ---
+  | *Id            | Situacao | Visibilidade | DhColeta | DhEntrega | MotivoDesativacaoId | DhCancelamento | DhDesativacao | DhFinalizacao | CustoEstimado | UnidadeNegocioId                                            |
+  | [Obtem da url] | 1        | 1            |          |           |                     |                |               |               |               | (select Id from UnidadesNegocio where Descricao = 'Padrão') |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCarga", <table>) (1,6s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaCarga"
+  --- table step argument ---
+  | *OfertaCargaId | Modalidade | Peso  | Volume | UnidadeVolume | TipoCargaId | TipoNaturezaCargaId | CodIdentificador | AcondicionamentoQtd | ValorCarga |
+  | [Obtem da url] | 1          | 0,000 |        | 7             |             |                     |                  |                     |            |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaCarga", <table>) (1,5s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaVeiculo"
+  --- table step argument ---
+  | *OfertaCargaId | TipoPessoa | ApenasCavaloMecanico |
+  | [Obtem da url] | 0          | true                 |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaVeiculo", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaRota"
+  --- table step argument ---
+  | *OfertaCargaId | *Ordem | LocalidadeCidade     | LocalidadeUF | LocalidadeLocalidade                                      | LocalidadeGooglePlaceId     | Rota | Motivo | Observacao | Documento     | DhInicio     | DhFim           | EmpresaId                                                                |
+  | [Obtem da url] | 0      | Curitiba             | PR           | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | 1    | 1      |            |               | [data atual] |                 | (select Id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda') |
+  | [Obtem da url] | 1      | Curitiba             | PR           | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | ChIJ74mkHXrk3JQRvvirz4xzlnE | 2    | 3      |            | ABC           |              | [data atual]    |                                                                          |
+  | [Obtem da url] | 2      | Curitiba             | PR           | Curitiba, PR, Brasil                                      | ChIJ3bPNUVPj3JQRCejLuqVrL20 | 2    | 3      |            | ABC1          |              | [data atual +1] |                                                                          |
+  | [Obtem da url] | 3      | Paranaguá            | PR           | Paranaguá, PR, Brasil                                     | ChIJ08GlR5-a25QR4biP0dHrbss | 2    | 3      |            | ABC12         |              | [data atual +2] |                                                                          |
+  | [Obtem da url] | 4      | Itapoá               | SC           | Itapoá, SC, 89249-000, Brasil                             | ChIJdfUuJshW2ZQRsN9WdVbveMk | 2    | 3      |            | ABC123        |              | [data atual +3] |                                                                          |
+  | [Obtem da url] | 5      | Joinville            | SC           | Joinville - SC, Brasil                                    | ChIJN6uxnfOj3pQR-ulh8Z2YS7w | 2    | 3      |            | ABC123        |              | [data atual +4] |                                                                          |
+  | [Obtem da url] | 6      | Barra Velha          | SC           | Barra Velha, SC, 88390-000, Brasil                        | ChIJ-WS1fBMr2ZQRz81qxoVgjh0 | 2    | 3      |            | ABC12345      |              | [data atual +5] |                                                                          |
+  | [Obtem da url] | 7      | São Francisco do Sul | SC           | São Francisco do Sul, SC, 89240-000, Brasil               | ChIJc8fWmhZJ2ZQRWfEmnQR5M0Q | 2    | 3      |            | ABC123456     |              | [data atual +4] |                                                                          |
+  | [Obtem da url] | 8      | Itajaí               | SC           | Itajaí - Volta de Cima, Itajaí - SC, Brasil               | chijyc_zm5tm2jqrbykejt3qau8 | 2    | 3      |            | ABC1234567    |              | [data atual +3] |                                                                          |
+  | [Obtem da url] | 9      | Balneário Camboriú   | SC           | Balneário Camboriú, SC, Brasil                            | ChIJrSrlwly22JQRxOut5vUEwC0 | 2    | 3      |            | ABC12345678   |              | [data atual +2] |                                                                          |
+  | [Obtem da url] | 10     | Florianópolis        | SC           | Florianópolis, SC, Brasil                                 | ChIJ1zLGsk45J5URRscEagtVvIE | 2    | 3      |            | ABC123456789  |              | [data atual +1] |                                                                          |
+  | [Obtem da url] | 11     | Imbituba             | SC           | Imbituba, SC, Brasil                                      | ChIJ09U2kI3KJpURzhSxwj2LKyI | 3    | 2      |            | ABC123456789A |              | [data atual]    |                                                                          |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaRota", <table>) (18,6s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamento"
+  --- table step argument ---
+  | *OfertaCargaId | ValorTarifa | PedagioInclusoTarifa | ValorAdiantamento | TipoAdiantamento | AceitaContraProposta | FormaPagamento | LivreTaxaDescarga | LivreTaxaCarga | TipoTarifaCargaId                    |
+  | [Obtem da url] |             | false                |                   |                  | false                | 3              | false             | false          | 25272F18-A53F-4F0D-A84B-F56688DBA202 |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,6s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposCartao"
+  --- table step argument ---
+  | *OfertaCargaId | TipoCartaoId |
+  | [Obtem da url] |              |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertasCargaPagamentoTiposBancoDeposito"
+  --- table step argument ---
+  | *OfertaCargaId | TipoBancoDepositoId | OfertaCargaId1 |
+  | [Obtem da url] |                     |                |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertasCargaPagam...", <table>) (1,4s)
+E os dados da oferta de carga devem ser gravados em banco na tabela "OfertaCargaContato"
+  --- table step argument ---
+  | *OfertaCargaId | ContatoId |
+  | [Obtem da url] |           |
+-> done: DataSteps.EntaoOsDadosDaOfertaDeCargaDevemSerGravadosEmBancoNaTabela("OfertaCargaContato", <table>) (1,4s)

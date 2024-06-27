@@ -1,0 +1,78 @@
+Quando excluir todas as cargas da BDD Embarcadora Ltda em pré-condição
+-> done: FretefyCargaSteps.QuandoExcluirTodasAsCargasDaBDDEmbarcadoraLtdaEmPre_Condicao() (0,0s)
+Dado o cadastro de empresa como embarcadora
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaComoEmbarcadora() (0,6s)
+E o cadastro de Empresa Envolvida padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadrao() (0,3s)
+E a oferta de carga restrita com valores padrão
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadrao() (3,9s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado o cadastro de Grupo de tarefas Padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeGrupoDeTarefasPadrao() (0,7s)
+E o cadastro da Característica padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaPadrao() (1,1s)
+Quando deletado o Template de Cargas padrão
+-> done: FretefyCargaSteps.QuandoDeletadoOTemplateDeCargasPadrao() (0,1s)
+Dado a tela de cadastro de cargas
+-> done: FretefyCargaSteps.DadoATelaDeCadastroDeCargas() (5,1s)
+E os valores para os campos
+  --- table step argument ---
+  | [gb] Transportador determinado por | [gb] Tipo de oferecimento |
+  | Oferecimento                       | Manual                    |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (0,7s)
+E os valores para os campos
+  --- table step argument ---
+  | [gb] Transportador determinado por | [c] Apenas cavalo mecânico | [s] Tarifa   | Frete      | Código identificador                                                        | [s] Acondicionamento | Quantidade | Peso total | Volume total | Valor da carga | [s] GrupoTarefasEmbarcador | [ms] Contatos                             | [date]Data de coleta¹ | [s] EmpresaEntregas         |
+  | Captação                           | marcado                    | Por tonelada | 1234567890 | Código identificador 123456789123456789123456789123456789123456789123456789 | Palete PBR           | 12345678   | 4200000    | 12345678     | 12345678       | Grupo tarefa BDD           | Contato BDD 1;Contato BDD 2;Contato BDD 3 | [data atual]          | Empresa envolvida BDD Razão |
+-> done: ValueSteps.DadoOsValoresParaOsCampos(<table>) (28,8s)
+Quando acionado o botão "Adicionar entrega"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar entrega") (1,0s)
+Dado as entregas da carga
+  --- table step argument ---
+  | Endereço         | [date]Previsão de entrega¹ | Documento | [s] GrupoTarefasEntregas |
+  | Rua pasteur, 463 | [data atual]               | ABC       | Grupo tarefa BDD         |
+-> done: FretefyCargaSteps.DadoAsEntregasDaCarga(<table>) (6,7s)
+Quando clicar no botão "Adicionar carga"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar carga") (1,1s)
+E aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,7s)
+Quando clicar no botão oculto "Salvar como template"
+-> done: ActionSteps.QuandoClicarNoBotaoOculto("Salvar como template") (1,3s)
+Dado o valor "Template BDD - R" para o campo "Nome do template"
+-> done: ValueSteps.DadoOValorParaOCampo("Template BDD - R", "Nome do template") (1,5s)
+Quando clicar no botão "Salvar template" da mensagem de alerta
+-> done: DialogSteps.QuandoAcionarOBotaoDaDialog("Salvar template") (1,3s)
+E aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,1s)
+Então deve haver a notificação na tela "Template de carga cadastrado com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Template de carga...") (0,1s)
+E devem haver os valores na tabela "OfertaCargaTemplate"
+  --- table step argument ---
+  | *Nome            | Template                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+  | Template BDD - R | {"correlationid":null,"codigo":null,"unidadenegocioid": "","ofertacargaid":null,"fretefyid":null,"pipemanualid":null,"storageid":null,"perfilid":null,"nomeperfil":null,"origemdestino":[{"id":"00000000-0000-0000-0000-000000000000","empresaid": "","empresa":"bdd embarcadora ltda","localidade":"r. pasteur, 463 - batel, curitiba - pr, 80250-104, brasil","cidade":"curitiba","uf":"pr","lat":-25.47019,"lng":-49.21442,"dhinicio": "","dhfim":null,"rota":1,"motivo":1,"placeid":"chij74mkhxrk3jqrvvirz4xzlne","ordem":0,"observacao":null,"documento":null,"componentes":[],"dadosbasefrete":null,"grupotarefaid": "","documentos":null},{"id":"00000000-0000-0000-0000-000000000000","empresaid": "","empresa":"empresa envolvida bdd razão","localidade":"r. pasteur, 463 - batel, curitiba - pr, 80250-104, brasil","cidade":"curitiba","uf":"pr","lat":-25.44372,"lng":-49.27898,"dhinicio": "","dhfim":null,"rota":2,"motivo":3,"placeid":"chij74mkhxrk3jqrvvirz4xzlne","ordem":1,"observacao":null,"documento":null,"componentes":[],"dadosbasefrete":null,"grupotarefaid": "","documentos":null},{"id":"00000000-0000-0000-0000-000000000000","empresaid": "","empresa":null,"localidade":"r. pasteur, 463 - batel, curitiba - pr, 80250-104, brasil","cidade":"curitiba","uf":"pr","lat":-25.443718,"lng":-49.278984,"dhinicio": "","dhfim":null,"rota":3,"motivo":2,"placeid":"chij74mkhxrk3jqrvvirz4xzlne","ordem":2,"observacao":null,"documento":null,"componentes":[],"dadosbasefrete":null,"grupotarefaid": "","documentos":null}],"rotacalculadageojson":[{"ordem":0,"latitude":-25.469597,"longitude":-49.214605},{"ordem":1,"latitude":-25.469411,"longitude":-49.214748},{"ordem":2,"latitude":-25.471175,"longitude":-49.217366},{"ordem":3,"latitude":-25.469793,"longitude":-49.219047},{"ordem":4,"latitude":-25.472412,"longitude":-49.223111},{"ordem":5,"latitude":-25.473948,"longitude":-49.227834},{"ordem":6,"latitude":-25.440713,"longitude":-49.252117},{"ordem":7,"latitude":-25.439174,"longitude":-49.252488},{"ordem":8,"latitude":-25.447343,"longitude":-49.273777},{"ordem":9,"latitude":-25.444342,"longitude":-49.275126},{"ordem":10,"latitude":-25.446114,"longitude":-49.279594},{"ordem":11,"latitude":-25.444548,"longitude":-49.280338},{"ordem":12,"latitude":-25.444002,"longitude":-49.278839},{"ordem":13,"latitude":-25.443599,"longitude":-49.277911},{"ordem":14,"latitude":-25.442316,"longitude":-49.278629},{"ordem":15,"latitude":-25.441939,"longitude":-49.277648},{"ordem":16,"latitude":-25.444791,"longitude":-49.276306},{"ordem":17,"latitude":-25.446114,"longitude":-49.279594},{"ordem":18,"latitude":-25.444548,"longitude":-49.280338},{"ordem":19,"latitude":-25.444003,"longitude":-49.278842}],"carga":{"unidadmedidaid":7,"modalidade":1,"pesobruto":42000.000,"volume":123.000000,"valorcarga":12345678.00,"tipocargaid":"d95f43c4-8b4d-4904-9a32-c497f4bae02b","acondicionamentoqtd":12345678,"naturezacargaid":null,"codidentificador":"código identificador 123456789123456789123456789123456789123456789123456789","tipofrete":1,"camposadicionais":null},"veiculo":{"tipopessoa":0,"tiposveiculo":["6e4e800a-75bf-4b1d-ac51-7678614b3a10"],"tiposcarrocerias":["b0c2792f-5039-45ad-8b0d-e93be8b4b312"],"rastreadores":[],"gerenciadores":[],"apenascavalomecanico":true},"visibilidade":{"visibilidade":3,"empresas":[],"configuracaooferecimentoid":null},"pagamento":{"tipotarifaid":"567bc39c-e2d6-4e0b-8f28-95cd82db35c1","valorfrete":12345678.00,"pedagio":false,"adiantamento":null,"tipoadiantamento":null,"aceitaproposta":false,"formapagamento":{"formapagamento":3,"cartoes":[],"bancos":[],"livretaxacarga":false,"livretaxadescarga":false},"valortotalfrete":518518476.00,"tabelafreteid":null,"tabelafreteadicionais":null,"tomadorservicoid":null,"impostosuspenso":null},"contatos":[{"contatoid":"475dc971-ac41-e911-85b3-00155d2c4152","contato":"contato bdd 1","telefone":"41991657266","email":"contatobdd@bdd.com"},{"contatoid":"485dc971-ac41-e911-85b3-00155d2c4152","contato":"contato bdd 2","telefone":"41991657266","email":"contatobdd@bdd.com"},{"contatoid":"495dc971-ac41-e911-85b3-00155d2c4152","contato":"contato bdd 3","telefone":"41991657266","email":"contatobdd@bdd.com"}],"qtdpublicacoes":0,"distancia": "","tempo": "","observacao":null,"custoestimado": "","situacao":1,"intervalohoras":null,"veiculoalocadoid":null,"placa":null,"distribuicaoautomatica":false,"caracteristicaid": "","origem":1,"oferecimentoexecucaoatualid":null,"motoristaid":null,"equipamentosids":null} |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("OfertaCargaTemplate", <table>) (0,0s)
+Dado o cadastro geral "Carga a partir de um template"
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroGeral("Carga a partir de...") (9,8s)
+Quando aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,1s)
+Dado o valor "Template BDD - R" para o campo "[s] Template de carga"
+-> done: ValueSteps.DadoOValorParaOCampo("Template BDD - R", "[s] Template de c...") (0,8s)
+Quando aguardar o carregamento da página
+-> done: BasicSteps.QuandoAguardarOCarregamentoDaPagina() (2,1s)
+Então devem haver os valores para o quadro de entregas
+  --- table step argument ---
+  | # | Pedido | Empresa                     | Local                                                     | Previsão de entrega | Grupo de tarefas |
+  | 1 |        | Empresa envolvida BDD Razão | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |                     |                  |
+  | 2 |        |                             | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |                     | Grupo tarefa BDD |
+-> done: FretefyCargaSteps.EntaoDevemHaverOsValoresParaOQuadroDeEntregas(<table>) (0,8s)
+E devem haver os valores para os campos
+  --- table step argument ---
+  | [s] Tarifa   | Frete      | Código identificador                                                        | [s] Acondicionamento | Quantidade | Peso total | Volume total | Valor da carga |
+  | Por tonelada | 12.345.678 | Código identificador 123456789123456789123456789123456789123456789123456789 | Palete PBR           | 12 345 678 | 42.000     | 123          | 12.345.678     |
+-> done: ValueSteps.EntaoDevemHaverOsValoresParaOsCampos(<table>) (3,1s)
+E devem haver os valores para os campos
+  --- table step argument ---
+  | [ms] Contatos                                                                                    | [Id]EmpresaEmbarcadora | [Id]EnderecoEmbarcadora                                   | [s] GrupoTarefasEmbarcador |
+  | C1Contato BDD 1 (41) 9 9165-7266C2Contato BDD 2 (41) 9 9165-7266C3Contato BDD 3 (41) 9 9165-7266 | BDD Embarcadora Ltda   | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | Grupo tarefa BDD           |
+-> done: ValueSteps.EntaoDevemHaverOsValoresParaOsCampos(<table>) (2,8s)

@@ -1,0 +1,69 @@
+Dado a conexão "fretefy" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("fretefy") (0,0s)
+E a Oferta de Carga Restrita com valores padrão
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadrao() (2,4s)
+E o cadastro de Template padrão de carga
+-> done: FretefyCargaSteps.DadoOCadastroDeTemplatePadraoDeCarga() (0,1s)
+E a conexão "notification" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("notification") (0,0s)
+Quando deletado o convite do usuário logado
+-> done: DataSteps.QuandoDeletadoOConviteDoUsuarioLogado() (4,1s)
+Dado a rotina "Preferências"
+-> done: NavigateSteps.DadoARotina("Preferências") (3,0s)
+Quando selecionar a aba "Notificações"
+-> done: FretefyCargaSteps.QuandoSelecionadoAAba("Notificações") (1,4s)
+Dado o valor "Seguir todas" para o campo "[gb] Seguir todas"
+-> done: ValueSteps.DadoOValorParaOCampo("Seguir todas", "[gb] Seguir todas") (0,4s)
+E o valor "marcado" para o campo "[c] cadastrada no sistema"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] cadastrada no...") (0,8s)
+E o valor "marcado" para o campo "[c] Carga desativada por tempo de expiração automático"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] Carga desativ...") (0,9s)
+E o valor "marcado" para o campo "[c] coleta na origem"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] coleta na origem") (1,1s)
+E o valor "marcado" para o campo "[c] evento no ponto de parada"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] evento no pon...") (1,2s)
+E o valor "marcado" para o campo "[c] ocorrência"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] ocorrência") (1,4s)
+E o valor "marcado" para o campo "[c] entrega no destino"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] entrega no de...") (1,7s)
+E o valor "marcado" para o campo "[c] Finalizar a carga"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] Finalizar a c...") (1,7s)
+E o valor "marcado" para o campo "[c] For feita uma proposta para a carga"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] For feita uma...") (1,9s)
+E o valor "marcado" para o campo "[c] For iniciada uma rodada do oferecimento"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] For iniciada ...") (2,1s)
+E o valor "marcado" para o campo "[c] For encerrada uma rodada do oferecimento"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] For encerrada...") (2,1s)
+E o valor "marcado" para o campo "[c] For concluída"
+-> done: ValueSteps.DadoOValorParaOCampo("marcado", "[c] For concluída") (3,3s)
+Quando acionado o botão "Salvar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Salvar") (0,8s)
+Então deve haver a notificação na tela "Dados atualizados com sucesso"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Dados atualizados...") (0,8s)
+Dado "10" segundos
+-> done: FretefyGeralSteps.DadoSegundos(10) (10,0s)
+Então devem haver os valores na tabela "UserChannelGroupSubscriptionInvites"
+  --- table step argument ---
+  | *UserId          | InviteState | ChannelGroupId                                        |
+  | [usuario logado] | 1           | (select Id from ChannelGroups where Name = 'Fretefy') |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("UserChannelGroupS...", <table>) (0,1s)
+E devem haver os valores na tabela "UserChannelGroupSubscriptions"
+  --- table step argument ---
+  | *UserId          | FollowMode | ChannelGroupId                                        |
+  | [usuario logado] | 1          | (select Id from ChannelGroups where Name = 'Fretefy') |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("UserChannelGroupS...", <table>) (0,1s)
+E devem haver os valores na tabela "UserChannelSubscriptions"
+  --- table step argument ---
+  | *UserId          | *ChannelId                           | UserChannelGroupSubscriptionId                                                 | ByEmail | ByScreen |
+  | [usuario logado] | EEE1FC1A-6D15-4E97-B520-681FABAD5BE8 | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | 2EBFC3BF-7811-45BF-8EFF-1B173C67253A | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | 35595006-D94D-4D33-AB5E-16212B1296BB | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | BEA465FE-16DB-4948-8740-564AB5AFD956 | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | ADF90E37-B3F8-4FAC-AE33-D10981F70CC0 | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | 68E55A0F-68E3-438A-AA8B-51358AC0649E | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | 726BD6AF-E004-4B27-BCAE-7763428C33D5 | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | 1CF2C47E-B4D3-4E73-BE01-276F33B0D9F2 | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | C8646ADB-D30E-4BE5-BF8B-D5AE0A1A2002 | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | 13ED67AF-000A-4FE6-AD10-2FDDE8DFE63F | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+  | [usuario logado] | 55C5FD56-B289-499C-B6B6-C72885AD8AE0 | (SELECT Id FROM UserChannelGroupSubscriptions where UserId = [usuario logado]) | false   | true     |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("UserChannelSubscr...", <table>) (1,2s)

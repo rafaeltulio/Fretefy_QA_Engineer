@@ -1,0 +1,72 @@
+Dado o cadastro de Grupo de tarefas Padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeGrupoDeTarefasPadrao() (0,2s)
+Dado a contratação da oferta de carga restrita com valores padrão
+-> done: FretefyCargaSteps.DadoAContratacaoDaOfertaDeCargaRestritaComValoresPadrao() (2,1s)
+Quando atualizado o valor "(select Id from GrupoTarefa where Nome = 'Grupo tarefa BDD')" para o campo "GrupoTarefaId" na tabela "ContratacoesCargaRota" usando como filtro o campo "ContratacaoCargaId" e valor "(select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8'))"
+-> done: DataSteps.QuandoAtualizadoOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValor("(select Id from G...", "GrupoTarefaId", "ContratacoesCarga...", "ContratacaoCargaId", "(select Id from C...") (0,1s)
+Dado a tela de Acompanhamento de Carga para o código "R-26D5E8C8" via URL
+-> done: FretefyCargaSteps.DadoATelaDeAcompanhamentoDeCargaParaOCodigoViaURL("R-26D5E8C8") (10,8s)
+Quando selecionar a aba "Acompanhamento"
+-> done: FretefyCargaSteps.QuandoSelecionadoAAba("Acompanhamento") (0,5s)
+Então a timeline deve estar com a situação "Contratado" ativa
+-> done: ValueSteps.EntaoATimelineDeveEstarComASituacaoAtiva("Contratado") (2,2s)
+Quando marcar atividade "tarefa 1 sem foto" da "Coleta" como feita
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeComoFeita("tarefa 1 sem foto", "Coleta") (2,8s)
+Quando marcar atividade "tarefa 2 com foto" da "Coleta" com foto
+  --- table step argument ---
+  | [date] Data/hora | [f] Imagem        |
+  | 01/01/2000 01:00 | Files\testers.png |
+-> done: FretefyCargaSteps.QuandoMarcarAtividadeDaComFoto("tarefa 2 com foto", "Coleta", <table>) (36,5s)
+Então deve haver a notificação na tela "Tarefa registrada com sucesso"
+-> error: mensagem diferente do esperado
+E devem haver os dados na tabela "ContratacoesCargaEvento"
+  --- table step argument ---
+  | *ContratacaoCargaId                                                                                                | *Descricao                 | TipoAcaoEvento | TipoEvento | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUf | LocalidadeLocalidade | LocalidadeGooglePlaceId | AnexoFileName | AnexoContentType | TarefaId                                                           |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 1 sem foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 1 sem foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 2 com foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 2 com foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | Lista de tarefas concluída | 1              | 2          |                    |                     |                  |              |                      |                         |               |                  |                                                                    |
+-> skipped because of previous errors
+E a timeline deve estar com a situação "Em andamento" ativa
+-> skipped because of previous errors
+Quando deletado o registro "(select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8'))" do campo "ContratacaoCargaId" na tabela "ContratacoesCargaEvento"
+-> skipped because of previous errors
+E marcar atividade "tarefa 1 sem foto" da "Parada" como feita
+-> skipped because of previous errors
+E marcar atividade "tarefa 2 com foto" da "Parada" com foto
+  --- table step argument ---
+  | [date] Data/hora | [f] Imagem        |
+  | 01/01/2000 01:00 | Files\testers.png |
+-> skipped because of previous errors
+Então deve haver a notificação na tela "Tarefa registrada com sucesso"
+-> skipped because of previous errors
+E a timeline deve estar com a situação "Em andamento" ativa
+-> skipped because of previous errors
+Quando aguardar o carregamento da página
+-> skipped because of previous errors
+Então devem haver os dados na tabela "ContratacoesCargaEvento"
+  --- table step argument ---
+  | *ContratacaoCargaId                                                                                                | *Descricao                 | TipoAcaoEvento | TipoEvento | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUf | LocalidadeLocalidade | LocalidadeGooglePlaceId | AnexoFileName | AnexoContentType | TarefaId                                                           |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 1 sem foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 1 sem foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 2 com foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 2 com foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | Lista de tarefas concluída | 2              | 2          |                    |                     |                  |              |                      |                         |               |                  |                                                                    |
+-> skipped because of previous errors
+Quando deletado o registro "(select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8'))" do campo "ContratacaoCargaId" na tabela "ContratacoesCargaEvento"
+-> skipped because of previous errors
+E marcar atividade "tarefa 1 sem foto" da "Entrega" como feita
+-> skipped because of previous errors
+E marcar atividade "tarefa 2 com foto" da "Entrega" com foto
+  --- table step argument ---
+  | [date] Data/hora | [f] Imagem        |
+  | 01/01/2000 01:00 | Files\testers.png |
+-> skipped because of previous errors
+Então deve haver a notificação na tela "Tarefa registrada com sucesso"
+-> skipped because of previous errors
+E a timeline deve estar com a situação "Entregue" ativa
+-> skipped because of previous errors
+E devem haver os dados na tabela "ContratacoesCargaEvento"
+  --- table step argument ---
+  | *ContratacaoCargaId                                                                                                | *Descricao                 | TipoAcaoEvento | TipoEvento | LocalidadeLatitude | LocalidadeLongitude | LocalidadeCidade | LocalidadeUf | LocalidadeLocalidade | LocalidadeGooglePlaceId | AnexoFileName | AnexoContentType | TarefaId                                                           |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 1 sem foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 1 sem foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | tarefa 2 com foto          | 4              | 2          |                    |                     |                  |              |                      |                         |               |                  | (select Id from ListaTarefa where Descricao = 'tarefa 2 com foto') |
+  | (select Id from ContratacoesCarga where OfertaCargaId = (select Id from OfertasCarga where Codigo = 'R-26D5E8C8')) | Lista de tarefas concluída | 3              | 2          |                    |                     |                  |              |                      |                         |               |                  |                                                                    |
+-> skipped because of previous errors

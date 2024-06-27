@@ -1,0 +1,58 @@
+Quando deletadas todas as Remessas em pré-condição
+-> done: FretefyCrossdocking.QuandoDeletadasTodasAsRemessasEmPre_Condicao() (0,0s)
+Dado o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,0s)
+E o cadastro da Unidade de Negócio "CD Matriz" vinculada a uma empresa em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaUnidadeDeNegocioVinculadaAUmaEmpresaEmPre_Condicao("CD Matriz") (0,0s)
+E o cadastro da Unidade de Negócio "CD Curitiba" vinculada a uma empresa em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaUnidadeDeNegocioVinculadaAUmaEmpresaEmPre_Condicao("CD Curitiba") (0,0s)
+Dado o logoff e login do Sistema em pré-condição
+-> done: FretefyGeralSteps.GivenOLogoffELoginDoSistemaEmPre_Condicao() (0,0s)
+Quando selecionado a Unidade de Negócio "CD Curitiba" em pré-condição
+-> done: FretefyGeralSteps.QuandoSelecionadoAUnidadeDeNegocioEmPre_Condicao("CD Curitiba") (0,0s)
+Dado o cadastro da Característica Crossdocking padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaCrossdockingPadrao() (0,1s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado o cadastro da Característica Crossdocking padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaCrossdockingPadrao() (0,1s)
+E a rotina "Crossdocking"
+-> done: NavigateSteps.DadoARotina("Crossdocking") (4,0s)
+Quando acionado o botão "Cadastrar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Cadastrar") (0,9s)
+Dados os valores para os campos
+  --- table step argument ---
+  | Código               | [s] Tomador do serviço        | [s] Agente da carga | [ms] Contato solicitante | Observações                     | [s] Característica                | [c] Urgente | personalizado obrigatório |
+  | Refer.: 123456789ABC | RegressionFy Embarcadora Ltda | Contato BDD 1       | Contato BDD 1            | Observações gerais Crossdocking | Característic Crossdocking padrão | Sim         | personalizado obrigatório |
+-> error: Contato BDD 1 não encontrado
+Dados os valores para os campos
+  --- table step argument ---
+  | [ms] EmpresaRemetente         | [ms] EmpresaDestinatario | [date] Data de retirada | [date] Data de entrega |
+  | RegressionFy Embarcadora Ltda | Empresa envolvida Razão  | [hoje]                  | [data atual +2]        |
+-> skipped because of previous errors
+Quando acionado o botão "Adicionar produto"
+-> skipped because of previous errors
+Dados os valores para os campos
+  --- table step argument ---
+  | Nome do produto | Nota Fiscal | [date] Data da emissão | Série | Chave                                                  | Referência | Espécie | Valor   | Quantidade | Peso | Volume | Comprimento | Largura | Altura |
+  | Produto 01      | 123456789AA | [hoje]                 | única | 2321 3465 4654 6546 5122 1321 6546 5400 0000 0000 0000 | ref. 0145  | NF      | 1580,55 | 5          | 5,05 | 1,01   | 56,61       | 65,89   | 24,77  |
+-> skipped because of previous errors
+Quando acionado o botão "Salvar"
+-> skipped because of previous errors
+Entao deve haver a notificação na tela "Remessa cadastrada com sucesso!"
+-> skipped because of previous errors
+E devem haver os dados na tabela "Remessa"
+  --- table step argument ---
+  | *OwnerId        | CreationUserId | ModificationUserId | ModificationTime | UnidadeNegocioId                                                 | Situacao | TomadorServicoId                                                         | AgenteCargaId                                          | SolicitanteId                                          | RemetenteId                                                              | RemetenteLatitude | RemetenteLongitude | RemetenteCidade | RemetenteUF | RemetenteLocalidade                                       | RemetenteCEP | RemetenteGooglePlaceId      | DestinatarioId                                                     | DestinatarioLatitude | DestinatarioLongitude | DestinatarioCidade | DestinatarioUF | DestinatarioLocalidade                                    | DestinatarioCEP | DestinatarioGooglePlaceId   | TerminalCargaId | TerminalEntregaId | DhRetirada | DhEntrega       | Observacoes                     | Urgente | CaracteristicaId                                                                      | CamposAdicionais                                                                                                                              | HistoricoAtualId | Codigo               |
+  | [Obtem OwnerId] | [Obtem UserId] |                    |                  | (Select id from UnidadesNegocio where Descricao = 'CD Curitiba') | 1        | (Select id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda') | (Select id from Contatos where Nome = 'Contato BDD 1') | (Select id from Contatos where Nome = 'Contato BDD 1') | (Select id from Envolvidos where Nome = 'RegressionFy Embarcadora Ltda') | -25,47019         | -49,21442          | Curitiba        | PR          | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |              | ChIJ74mkHXrk3JQRvvirz4xzlnE | (Select id from Envolvidos where Nome = 'Empresa envolvida Razão') | -25,44372            | -49,27898             | Curitiba           | PR             | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |                 | ChIJ74mkHXrk3JQRvvirz4xzlnE |                 |                   | [hoje]     | [data atual +2] | Observações gerais Crossdocking | True    | (select Id from Caracteristica where Descricao = 'Característic Crossdocking padrão') | [{"Id":"PersonalizadoObrigatório","Nome":"personalizado obrigatório","Valor":"personalizado obrigatório","Tipo":"string","Obrigatorio":true}] |                  | Refer.: 123456789ABC |
+-> skipped because of previous errors
+E devem haver os dados na tabela "RemessaItem"
+  --- table step argument ---
+  | *RemessaId                                               | Nome       | Serie | NotaFiscal | DhNotaFiscal | Chave                                        | Referencia | Especie | Quantidade | Peso  | Volume   | Comprimento | Largura | Altura | Valor   |
+  | (SELECT id from Remessa where OwnerId = [Obtem OwnerId]) | Produto 01 | única | 123456789  | [hoje]       | 23213465465465465122132165465400000000000000 | ref. 0145  | NF      | 5          | 5,050 | 1,010000 | 56,61       | 65,89   | 24,77  | 1580,55 |
+-> skipped because of previous errors
+E devem haver os dados na tabela "RemessaHistorico"
+  --- table step argument ---
+  | *RemessaId                                               | CreationUserId | CreationTime | ModificationUserId | Ordem | EmpresaOrigemId | OrigemLatitude | OrigemLongitude | OrigemCidade | OrigemUF | OrigemLocalidade | OrigemCEP | OrigemGooglePlaceId | EmpresaDestinoId | DestinoLatitude | DestinoLongitude | DestinoCidade | DestinoUF | DestinoLocalidade | DestinoCEP | DestinoGooglePlaceId | Situacao | OfertaCargaId | Tipo | UnidadeDestinoId | UnidadeOrigemId |
+  | (SELECT id from Remessa where OwnerId = [Obtem OwnerId]) |                |              |                    |       |                 |                |                 |              |          |                  |           |                     |                  |                 |                  |               |           |                   |            |                      |          |               |      |                  |                 |
+-> skipped because of previous errors

@@ -1,0 +1,60 @@
+Quando deletadas todas as Remessas em pré-condição
+-> done: FretefyCrossdocking.QuandoDeletadasTodasAsRemessasEmPre_Condicao() (0,3s)
+Dado o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,7s)
+E o cadastro da Unidade de Negócio "CD Matriz" vinculada a uma empresa em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaUnidadeDeNegocioVinculadaAUmaEmpresaEmPre_Condicao("CD Matriz") (1,0s)
+E o cadastro da Unidade de Negócio "CD Curitiba" vinculada a uma empresa em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaUnidadeDeNegocioVinculadaAUmaEmpresaEmPre_Condicao("CD Curitiba") (0,7s)
+Dado o logoff e login do Sistema em pré-condição
+-> done: FretefyGeralSteps.GivenOLogoffELoginDoSistemaEmPre_Condicao() (12,3s)
+Quando selecionado a Unidade de Negócio "CD Curitiba" em pré-condição
+-> done: FretefyGeralSteps.QuandoSelecionadoAUnidadeDeNegocioEmPre_Condicao("CD Curitiba") (5,4s)
+Dado o cadastro da Característica Crossdocking padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaCrossdockingPadrao() (0,5s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado o cadastro da Característica Crossdocking padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaCrossdockingPadrao() (0,1s)
+E a rotina "Crossdocking"
+-> done: NavigateSteps.DadoARotina("Crossdocking") (3,7s)
+Quando acionado o botão "Cadastrar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Cadastrar") (2,5s)
+Dado o valor "Característic Crossdocking padrão" para o campo "[s] Característica"
+-> done: ValueSteps.DadoOValorParaOCampo("Característic Cro...", "[s] Característica") (1,7s)
+Então os campos devem ser obrigatórios
+  --- table step argument ---
+  | Código da remessa | Local de coleta | Local de entrega | Data de coleta | [s] Característica | personalizado obrigatório | Data de entrega |
+  |                   |                 |                  |                |                    |                           |                 |
+-> done: ValueSteps.EntaoOsCamposDevemSerObrigatorios(<table>) (6,2s)
+E os campos não devem ser obrigatórios
+  --- table step argument ---
+  | [s] Agente da carga | [s] Contato agente | [s] Tomador do serviço | Contatos | [s] EmpresaRemetente | [s] EmpresaDestinatario | [s] Terminal de coleta | [s] Terminal de entrega | Observações |
+  |                     |                    |                        |          |                      |                         |                        |                         |             |
+-> done: ValueSteps.EntaoOsCamposNaoDevemSerObrigatorios(<table>) (3,2s)
+Quando acionado o botão "Adicionar documento"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar documento") (0,9s)
+Então os campos devem ser obrigatórios
+  --- table step argument ---
+  | Nota Fiscal | Data da emissão |
+  |             |                 |
+-> done: ValueSteps.EntaoOsCamposDevemSerObrigatorios(<table>) (3,0s)
+E os campos não devem ser obrigatórios
+  --- table step argument ---
+  | Série | Chave | Referência | [s]Acondicionamento | Valor | Imposto suspenso | Quantidade | Peso | Volume |
+  |       |       |            |                     |       |                  |            |      |        |
+-> done: ValueSteps.EntaoOsCamposNaoDevemSerObrigatorios(<table>) (3,6s)
+Quando acionado o botão "Adicionar item"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar item") (1,1s)
+E acionado o botão "Expandir"
+-> done: ActionSteps.QuandoAcionadoOBotao("Expandir") (13,6s)
+Então os campos devem ser obrigatórios
+  --- table step argument ---
+  | Código do produto | Nome do produto |
+  |                   |                 |
+-> done: ValueSteps.EntaoOsCamposDevemSerObrigatorios(<table>) (1,6s)
+Então os campos não devem ser obrigatórios
+  --- table step argument ---
+  | [s]Acondicionamento | Quantidade de volumes | Peso total | Volume | Comprimento | Largura | Altura |
+  |                     |                       |            |        |             |         |        |
+-> done: ValueSteps.EntaoOsCamposNaoDevemSerObrigatorios(<table>) (3,7s)

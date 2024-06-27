@@ -1,0 +1,32 @@
+Dado a parametrização para testes do dock
+-> done: ATDDFretefyDock.GivenAParametrizacaoParaTestesDoDock() (10,3s)
+Quando o transportador criar uma reserva padrão via portal
+  --- table step argument ---
+  | [s] Característica                  | Observações                | [s] Unidade de negócio | [s] Direção da doca | [s] Tipo de veículo | Placa do veículo | Nome do motorista | [mask] CPF do motorista | [mask] Número do celular | [ad] Dia | [ah] Hora |
+  | Característic de Agendamento padrão | Observações de testes atdd | Padrão                 | Carregamento        | Leve                | AAA1234          | motorista Atdd    | 69977620008             | 41999999999              | [hoje]   | [hora +1] |
+-> done: ATDDFretefyDock.WhenOTransportadorCriarUmaReservaPadraoViaPortal(<table>) (17,2s)
+Então devem haver os valores na tabela "Reserva"
+  --- table step argument ---
+  | *Id                                                    | ModificationUserId | ModificationTime | DocaId                                                                              | DocaGradeId | DocaGradeHorarioId | DhReserva     | CodigoReferencia                  | Observacoes                | PlacaVeiculo | NomeMotorista  | DocumentoMotorista | CelularMotorista | Situacao | DhChegada | DhSaida | Direcao | CamposAdicionais | DhChegadaNaDoca | EtapaId | CargaCodigo | CargaId | Transportadoras | Urgente | ComprovanteUrgenciaContentType | ComprovanteUrgenciaFileName | ComprovanteUrgenciaStoragePath | TransportadorNome          | Latitude | Longitude | Tipo | SolicitanteReserva                         | TipoCarroceriaId                     | TipoVeiculoId                        | VeiculoConjuntoId                    | DhReservaOriginal | CercaEletronicaRaio | AnexosRecusa | MotivoRecusa |
+  | select id from RESERVA where ownerID = [Obtem OwnerId] |                    |                  | (select id from Doca where nome = 'Doca atdd padrão' and ownerID = [Obtem OwnerId]) |             |                    | [DataHora +1] | [Obtem CodigoArmazenadoParaTeste] | Observações de testes atdd | AAA1234      | motorista Atdd | 69977620008        | 41999999999      | 1        |           |         | 2       |                  |                 |         |             |         | []              | false   |                                |                             |                                | Empresa envolvida BDD Dock |          |           | 1    | UsuarioBDDportalAgendamento@fretefy.com.br | b0c2792f-5039-45ad-8b0d-e93be8b4b312 | 9375a4cb-3c2f-41ca-941d-4eaf26ff2e21 | f2c56586-535e-45fb-8a2d-04083156963c | [DataHora +1]     |                     | []           |              |
+-> done: DataSteps.ThenDevemHaverOsValoresNaTabela("Reserva", <table>) (1,9s)
+E deve haver reserva "[Obtem CodigoArmazenadoParaTeste]" no portal de agendamento com os valores
+  --- table step argument ---
+  | Data da reserva | Horário do início | Horário do fim | Doca             | Unidade de negócio | Código de referência              | Veículo | Tipo de veículo | Motorista      | Documento do motorista | Telefone do motorista | Característica                      | Observações                |
+  | [hoje]          | [hora +1]         | [hora +2]      | Doca atdd padrão | Padrão             | [Obtem CodigoArmazenadoParaTeste] | AAA1234 | Leve            | motorista Atdd | 699.776.200-08         | (41) 9 9999-9999      | Característic de Agendamento padrão | Observações de testes atdd |
+-> done: ATDDFretefyDock.ThenDeveHaverReservaNoPortalDeAgendamentoComOsValores("[Obtem CodigoArma...", <table>) (3,0s)
+E deve haver reserva "[Obtem CodigoArmazenadoParaTeste]" no quadro de agendamentos com os valores
+  --- table step argument ---
+  | Fornecedor                 | Data da reserva | Horário da reserva | Doca             | Código de referência              | Veículo | Tipo de veículo | Motorista      | Documento do motorista | Telefone do motorista | Característica                      | Observações                |
+  | Empresa envolvida BDD Dock | [hoje]          | [hora +1]          | Doca atdd padrão | [Obtem CodigoArmazenadoParaTeste] | AAA1234 | Leve            | motorista Atdd | 699.776.200-08         | (41) 9 9999-9999      | Característic de Agendamento padrão | Observações de testes atdd |
+-> done: ATDDFretefyDock.ThenDeveHaverReservaNoQuadroDeAgendamentosComOsValores("[Obtem CodigoArma...", <table>) (7,4s)
+E deve haver reserva no relatório de agendamento com os valores
+  --- table step argument ---
+  | Código de referência              | Doca             | Fornecedor                 | CNPJ               | Unidade de negócio | Usuário                        | Veículo | Tipo de veículo | Tipo de carroceria | Motorista      | Documento do motorista | Tipo de operação | Data atual da reserva | Data original da reserva | Chegada do veículo confirmada | Inicio da carga/descarga | Fim da carga/descarga | Situação atual | Observações                | Etapa atual | Característica                      | Tipo   |
+  | [Obtem CodigoArmazenadoParaTeste] | Doca atdd padrão | Empresa envolvida BDD Dock | 35.840.016/0001-97 | Padrão             | Usuário BDD Portal Agendamento | AAA1234 | Leve            |                    | motorista Atdd | 69977620008            | Carregamento     | [Data e hora +1]      | [Data e hora +1]         |                               |                          |                       | Agendada       | Observações de testes atdd |             | Característic de Agendamento padrão | Normal |
+-> done: ATDDFretefyDock.ThenDeveHaverReservaNoRelatorioDeAgendamentoComOsValores(<table>) (14,5s)
+E deve haver reserva no portal do motorista com CPF "69977620008" e placa "AAA1234"
+  --- table step argument ---
+  | Empresa                 | Unidade de negócio | Doca             | Código de referência              |
+  | ATDDFy Embarcadora Ltda | Padrão             | Doca atdd padrão | [Obtem CodigoArmazenadoParaTeste] |
+-> done: ATDDFretefyDock.ThenDeveHaverReservaNoPortalDoMotoristaComCPFePlaca("69977620008", "AAA1234", <table>) (27,6s)

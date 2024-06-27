@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium_Driver", "Selenium_Driver\Selenium_Driver.csproj", "{C87094C0-062B-4988-B41B-B5373A88E3CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fretefy_Vaga", "Fretefy_Vaga\Fretefy_Vaga.csproj", "{15465313-2C37-4799-A267-F88059FBB09A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Dev|Any CPU = Dev|Any CPU
+		Develop|Any CPU = Develop|Any CPU
+		Hom|Any CPU = Hom|Any CPU
+		Local|Any CPU = Local|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Develop|Any CPU.ActiveCfg = Develop|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Develop|Any CPU.Build.0 = Develop|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Hom|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Hom|Any CPU.Build.0 = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Local|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Local|Any CPU.Build.0 = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87094C0-062B-4988-B41B-B5373A88E3CF}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Develop|Any CPU.ActiveCfg = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Develop|Any CPU.Build.0 = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Hom|Any CPU.ActiveCfg = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Hom|Any CPU.Build.0 = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Local|Any CPU.ActiveCfg = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Local|Any CPU.Build.0 = Debug|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15465313-2C37-4799-A267-F88059FBB09A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {707F6040-72B5-49D4-A8AF-9927D855E412}
+	EndGlobalSection
+EndGlobal

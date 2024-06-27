@@ -1,0 +1,84 @@
+Dado o cadastro de empresa como embarcadora em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaComoEmbarcadoraEmPre_Condicao() (0,0s)
+E o cadastro de Empresa Envolvida padrão em pré-condição
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDeEmpresaEnvolvidaPadraoEmPre_Condicao() (0,0s)
+E a oferta de carga restrita com valores padrão em pré-condição
+-> done: FretefyCargaSteps.DadoAOfertaDeCargaRestritaComValoresPadraoEmPre_Condicao() (0,0s)
+E que as pré-condições foram executadas
+-> done: BasicSteps.DadoQueAsPre_CondicoesForamExecutadas() (0,0s)
+Dado a tela de cadastro de cargas
+-> done: FretefyCargaSteps.DadoATelaDeCadastroDeCargas() (4,5s)
+E o valor "Alocação" para o campo "[gb] Transportador determinado por"
+-> done: ValueSteps.DadoOValorParaOCampo("Alocação", "[gb] Transportado...") (0,3s)
+E o valor "Empresa envolvida Razão" para o campo "[s] EmpresaEntregas"
+-> done: ValueSteps.DadoOValorParaOCampo("Empresa envolvida...", "[s] EmpresaEntregas") (3,1s)
+Quando acionado o botão "Adicionar entrega"
+-> done: ActionSteps.QuandoAcionadoOBotao("Adicionar entrega") (1,1s)
+Dado as entregas da carga
+  --- table step argument ---
+  | Endereço             | [date]Previsão de entrega¹ | Documento     |
+  | Rua pasteur, 463     | [data atual]               | ABC           |
+  | Curitiba             | [data atual +1]            | ABC1          |
+  | Paranaguá            | [data atual +2]            | ABC12         |
+  | Itapoá               | [data atual +3]            | ABC123        |
+  | Joinvile             | [data atual +4]            | ABC123        |
+  | Barra Velha          | [data atual +5]            | ABC12345      |
+  | São Francisco do Sul | [data atual +4]            | ABC123456     |
+  | Itajaí               | [data atual +3]            | ABC1234567    |
+  | Balneario Camburiú   | [data atual +2]            | ABC12345678   |
+  | Florianópolis        | [data atual +1]            | ABC123456789  |
+  | Imbituba             |                            | ABC123456789A |
+-> done: FretefyCargaSteps.DadoAsEntregasDaCarga(<table>) (64,6s)
+Então devem haver os valores para o quadro de entregas
+  --- table step argument ---
+  | #  | Pedido        | Empresa                 | Local                                                     | Previsão de entrega |
+  | 1  |               | Empresa envolvida Razão | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |                     |
+  | 2  | ABC           |                         | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | [data atual]        |
+  | 3  | ABC1          |                         | Curitiba, PR, Brasil                                      | [data atual +1]     |
+  | 4  | ABC12         |                         | Paranaguá, PR, Brasil                                     | [data atual +2]     |
+  | 5  | ABC123        |                         | Itapoá, SC, 89249-000, Brasil                             | [data atual +3]     |
+  | 6  | ABC123        |                         | Joinville - SC, Brasil                                    | [data atual +4]     |
+  | 7  | ABC12345      |                         | Barra Velha, SC, 88390-000, Brasil                        | [data atual +5]     |
+  | 8  | ABC123456     |                         | São Francisco do Sul, SC, 89240-000, Brasil               | [data atual +4]     |
+  | 9  | ABC1234567    |                         | Itajaí - Volta de Cima, Itajaí - SC, Brasil               | [data atual +3]     |
+  | 10 | ABC12345678   |                         | Balneário Camboriú, SC, Brasil                            | [data atual +2]     |
+  | 11 | ABC123456789  |                         | Florianópolis, SC, Brasil                                 | [data atual +1]     |
+  | 12 | ABC123456789A |                         | Imbituba, SC, Brasil                                      |                     |
+-> done: FretefyCargaSteps.EntaoDevemHaverOsValoresParaOQuadroDeEntregas(<table>) (5,2s)
+Quando remover a entrega "2"
+-> done: FretefyCargaSteps.QuandoRemoverAEntrega("2") (2,3s)
+E remover a entrega "5"
+-> done: FretefyCargaSteps.QuandoRemoverAEntrega("5") (2,4s)
+Então devem haver os valores para o quadro de entregas
+  --- table step argument ---
+  | #  | Pedido        | Empresa                 | Local                                                     | Previsão de entrega |
+  | 1  |               | Empresa envolvida Razão | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |                     |
+  | 2  | ABC1          |                         | Curitiba, PR, Brasil                                      | [data atual +1]     |
+  | 3  | ABC12         |                         | Paranaguá, PR, Brasil                                     | [data atual +2]     |
+  | 4  | ABC123        |                         | Itapoá, SC, 89249-000, Brasil                             | [data atual +3]     |
+  | 5  | ABC12345      |                         | Barra Velha, SC, 88390-000, Brasil                        | [data atual +5]     |
+  | 6  | ABC123456     |                         | São Francisco do Sul, SC, 89240-000, Brasil               | [data atual +4]     |
+  | 7  | ABC1234567    |                         | Itajaí - Volta de Cima, Itajaí - SC, Brasil               | [data atual +3]     |
+  | 8  | ABC12345678   |                         | Balneário Camboriú, SC, Brasil                            | [data atual +2]     |
+  | 9  | ABC123456789  |                         | Florianópolis, SC, Brasil                                 | [data atual +1]     |
+  | 10 | ABC123456789A |                         | Imbituba, SC, Brasil                                      |                     |
+-> done: FretefyCargaSteps.EntaoDevemHaverOsValoresParaOQuadroDeEntregas(<table>) (3,1s)
+Quando editar a entrega "7"
+  --- table step argument ---
+  | Endereço         | Documento |
+  | Rua pasteur, 463 | Editado   |
+-> done: FretefyCargaSteps.QuandoEditarAEntrega("7", <table>) (7,6s)
+Então devem haver os valores para o quadro de entregas
+  --- table step argument ---
+  | #  | Pedido        | Empresa                 | Local                                                     | Previsão de entrega |
+  | 1  |               | Empresa envolvida Razão | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil |                     |
+  | 2  | ABC1          |                         | Curitiba, PR, Brasil                                      | [data atual +1]     |
+  | 3  | ABC12         |                         | Paranaguá, PR, Brasil                                     | [data atual +2]     |
+  | 4  | ABC123        |                         | Itapoá, SC, 89249-000, Brasil                             | [data atual +3]     |
+  | 5  | ABC12345      |                         | Barra Velha, SC, 88390-000, Brasil                        | [data atual +5]     |
+  | 6  | ABC123456     |                         | São Francisco do Sul, SC, 89240-000, Brasil               | [data atual +4]     |
+  | 7  | Editado       |                         | R. Pasteur, 463 - Batel, Curitiba - PR, 80250-104, Brasil | [data atual +3]     |
+  | 8  | ABC12345678   |                         | Balneário Camboriú, SC, Brasil                            | [data atual +2]     |
+  | 9  | ABC123456789  |                         | Florianópolis, SC, Brasil                                 | [data atual +1]     |
+  | 10 | ABC123456789A |                         | Imbituba, SC, Brasil                                      |                     |
+-> done: FretefyCargaSteps.EntaoDevemHaverOsValoresParaOQuadroDeEntregas(<table>) (3,3s)

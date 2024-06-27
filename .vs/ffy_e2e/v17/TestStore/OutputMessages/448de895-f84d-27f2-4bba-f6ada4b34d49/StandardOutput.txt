@@ -1,0 +1,42 @@
+Quando deletadas todas as Docas do banco de dados
+-> done: FretefyPortalAgendamentoSteps.WhenDeletadasTodasAsDocasDoBancoDeDados() (0,2s)
+Dado o cadastro da Característica do Dock Scheduling padrão
+-> done: FretefyConfigCadastrosSteps.DadoOCadastroDaCaracteristicaDoPortalAgendamentoPadrao() (0,2s)
+E o cadastro da doca padrão
+-> done: FretefyPortalAgendamentoSteps.GivenOCadastroDaDocaPadrao() (0,1s)
+E a conexão "agendamento" com o banco
+-> done: DataSteps.DadoAConexaoComOBanco("agendamento") (0,0s)
+Dado o cadastro de programação padrão
+-> done: FretefyPortalAgendamentoSteps.GivenOCadastroDeProgramacaoPadrao() (0,4s)
+E a rotina "Dock scheduling|Agendamentos|Programação de horários"
+-> done: NavigateSteps.DadoARotina("Dock scheduling|A...") (5,5s)
+Quando "Excluir" a programação "Programação regression padrão"
+-> done: FretefyPortalAgendamentoSteps.WhenAcaoProgramacao("Excluir", "Programação regre...") (0,8s)
+Então deve haver o alerta na tela com a mensagem "Excluir programação"
+-> done: DialogSteps.EntaoDeveHaverOAlertaNaTelaComAMensagem("Excluir programação") (0,3s)
+Quando acionar o botão "Excluir" da caixa de diálogo
+-> done: DialogSteps.QuandoAcionarOBotaoDaDialog("Excluir") (0,6s)
+Então deve haver a mensagem na tela "Exclusão realizada com sucesso!"
+-> done: DialogSteps.EntaoDeveHaverAMensagemNaTela("Exclusão realizad...") (1,0s)
+E não deve haver o valor "Programação regression padrão" para o campo "nome" na tabela "Programação" usando como filtro o campo "Nome" e valor "Programação regression padrão"
+-> done: DataSteps.EntaoNaoDeveHaverOValorParaOCampoNaTabelaUsandoComoFiltroOCampoEValor("Programação regre...", "nome", "Programação", "Nome", "Programação regre...") (0,7s)
+E não devem haver os dados na tabela "PROGRAMACAO"
+  --- table step argument ---
+  | *ownerId        | *Nome                         | Situacao | UnidadeNegocioId  | Nome                          | PossuiDataLimite | DataInicio | DataFim    |
+  | [Obtem OwnerId] | Programação regression padrão | 2        | [Obtem UnidadeId] | Programação regression padrão | false            | 01/01/2024 | 01/01/2024 |
+-> done: DataSteps.EntaoNaoDevemHaverOsValoresNaTabela("PROGRAMACAO", <table>) (0,1s)
+E não devem haver os dados na tabela "ProgramacaoGradeConfigTurno"
+  --- table step argument ---
+  | *ProgramacaoGradeConfigid                                                                                                                                                                                                           | HorariosVinculados | HoraInicio | HoraFim | Intervalo |
+  | (select id from ProgramacaoGradeConfig where ProgramacaoGradeid in (select id from ProgramacaoGrade where Programacaoid = (select id from PROGRAMACAO where OwnerId = [Obtem OwnerId] and nome = 'Programação regression padrão'))) | false              | 480        | 1080    | 60        |
+-> done: DataSteps.EntaoNaoDevemHaverOsValoresNaTabela("ProgramacaoGradeC...", <table>) (3,0s)
+E não devem haver os dados na tabela "ProgramacaoGradeConfigTurnoHorario"
+  --- table step argument ---
+  | *ProgramacaoGradeTurnoId                                                                                                                                                                                                                                                                                             | *Hora | Hora |
+  | ((select id from ProgramacaoGradeConfigTurno where ProgramacaoGradeConfigid in (select id from ProgramacaoGradeConfig where ProgramacaoGradeid in (select id from ProgramacaoGrade where Programacaoid = (select id from PROGRAMACAO where OwnerId = [Obtem OwnerId] and nome = 'Programação regression padrão'))))) | 480   | 480  |
+-> done: DataSteps.EntaoNaoDevemHaverOsValoresNaTabela("ProgramacaoGradeC...", <table>) (0,8s)
+E não devem haver os dados na tabela "ProgramacaoDocaHorarios"
+  --- table step argument ---
+  | *Programacaoid                                                                                          | *Hora | PossuiDataLimite | DataInicio | DataFim    | DiaSemana | ProgramacaoGradeConfigTurnoHorarioId |
+  | (select id from PROGRAMACAO where OwnerId = [Obtem OwnerId] and nome = 'Programação regression padrão') | 480   | false            | 01/01/2024 | 01/01/2024 | 7         | 111111111111                         |
+-> done: DataSteps.EntaoNaoDevemHaverOsValoresNaTabela("ProgramacaoDocaHo...", <table>) (3,7s)

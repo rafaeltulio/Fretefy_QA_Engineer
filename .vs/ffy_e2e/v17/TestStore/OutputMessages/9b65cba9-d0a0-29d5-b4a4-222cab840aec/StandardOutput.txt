@@ -1,0 +1,39 @@
+Quando deletado todos dados de Tabela Frete do banco
+-> done: FretefyConfigTabelaDeFreteSteps.QuandoDeletadoTodosDadosDaTabelaFreteDoBanco() (0,1s)
+Dado a rotina "Configurações|Tabela de frete"
+-> done: NavigateSteps.DadoARotina("Configurações|Tab...") (3,9s)
+Quando clicar no botão "Cadastrar"
+-> done: ActionSteps.QuandoAcionadoOBotao("Cadastrar") (0,8s)
+E selecionar o template de tabela frete "Tabela Simplificada"
+-> done: FretefyConfigTabelaDeFreteSteps.QuandoSelecionarOTemplateDeTabelaFrete("Tabela Simplificada") (0,7s)
+Dado o valor "RegressionFy Transportadora Ltda" para o campo "[s] Transportadora"
+-> done: ValueSteps.DadoOValorParaOCampo("RegressionFy Tran...", "[s] Transportadora") (2,2s)
+Quando clicar no botão "Próximo"
+-> done: ActionSteps.QuandoAcionadoOBotao("Próximo") (0,6s)
+E selecionar o passo "Valores"
+-> done: FretefyConfigTabelaDeFreteSteps.QuandoSelecionarOPasso("Valores") (0,6s)
+Quando informar os valores do frete
+  --- table step argument ---
+  | Distância | Peso  | Cubagem | Valor da Nota |
+  | 128km     | 70 Kg | 0,3 m³  | R$ 375,00     |
+-> done: FretefyConfigTabelaDeFreteSteps.QuandoInformarOsValoresDoFrete(<table>) (3,5s)
+Então os valores dos componentes de frete devem ser
+  --- table step argument ---
+  | Componente          | Valor    | Cálculo                        |
+  | Peso Considerado    | 90 kg    |                                |
+  | Fração de distância | R$ 10,50 | 1,75 * ceiling(128,00 / 25,00) |
+  | Fração de peso      | R$ 11,25 | 1,25 * ceiling(90,00 / 10,00)  |
+  | Pedágio             | R$ 0,14  | 11,25 * (1,25 / 100)           |
+  | GRIS                | R$ 0,38  | 375,00 * (0,10 / 100)          |
+-> done: FretefyConfigTabelaDeFreteSteps.EntaoOsValoresDosComponentesDeFreteDevemSer(<table>) (14,8s)
+Então o total do frete deve ser "Total R$ 22,27"
+-> done: FretefyConfigTabelaDeFreteSteps.EntaoOTotalDoFreteDeveSer("Total R$ 22,27") (0,5s)
+Quando acionado o botão "Concluir"
+-> done: ActionSteps.QuandoAcionadoOBotao("Concluir") (0,7s)
+Então deve haver a notificação na tela "Tabela de frete cadastrada com sucesso"
+-> done: DialogSteps.EntaoDeveHaverANotificacaoNaTela("Tabela de frete c...") (0,4s)
+E devem haver os valores na tabela "TabelaFrete"
+  --- table step argument ---
+  | *Id                                                                                                                                      | Nome                                                           | OwnerTransportadoraId                                                 | DhValidade | TipoTransporte | TipoControle | Ativo | OferecimentoConfiguracaoId                                                                             | Componentes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | FatorPesoCubado | Formula                                                           | MaiorMenorPeso | ReferenciaCubagem | ReferenciaDistancia | ReferenciaPeso | ReferenciaRegiao | ReferenciaVeiculo | TipoReferencia | TipoTabela | UtilizaPesoCubado | ValoresGerais                                                                                                                                                                                                                                                                               | ValoresMatriz |
+  | (SELECT Id FROM TabelaFrete where Nome = 'Template de Fracionado controlado por taxa de Distância e Peso' and ownerId = [obtem ownerid]) | Template de Fracionado controlado por taxa de Distância e Peso | SELECT Id FROM Owners where Name = 'RegressionFy Transportadora Ltda' |            | 1              | 2            | True  | (select Id from OferecimentoConfiguracao where Nome = 'Tabela de frete' and ownerId = [obtem ownerid]) | [{"TipoIncidencia":2,"CategoriaId":"6227ffcd-0918-4b41-a6f1-850a5f131b85","Descricao":"Fração de peso","Variavel":"{{FracaoDePeso}}","TipoComponente":3,"ExpressaoValor":"{{FracaoDePeso_ValorPorFracao}} * ceiling({{PesoExcedido}} / {{FracaoDePeso_Fracao}})","ExpressaoCondicao":"","Parametro":"{{PesoExcedido}}","Entradas":[{"Nome":"Valor por fração","Variavel":"{{FracaoDePeso_ValorPorFracao}}","Tipo":2},{"Nome":"Fração","Variavel":"{{FracaoDePeso_Fracao}}","Tipo":2}],"Condicoes":[],"ValorMinimo":null},{"TipoIncidencia":2,"CategoriaId":"6227ffcd-0918-4b41-a6f1-850a5f131b85","Descricao":"Fração de distância","Variavel":"{{FracaoDeDistancia}}","TipoComponente":3,"ExpressaoValor":"{{FracaoDeDistancia_ValorPorFracao}} * ceiling({{DistanciaExcedida}} / {{FracaoDeDistancia_Fracao}})","ExpressaoCondicao":"","Parametro":"{{DistanciaExcedida}}","Entradas":[{"Nome":"Valor por fração","Variavel":"{{FracaoDeDistancia_ValorPorFracao}}","Tipo":2},{"Nome":"Fração","Variavel":"{{FracaoDeDistancia_Fracao}}","Tipo":2}],"Condicoes":[],"ValorMinimo":null},{"TipoIncidencia":2,"CategoriaId":"44c1457c-976f-4424-98cb-ed9b34fb2acd","Descricao":"Pedágio","Variavel":"{{Pedagio}}","TipoComponente":2,"ExpressaoValor":"{{FracaoDePeso}} * ({{Pedagio_Percentual}} / 100)","ExpressaoCondicao":"","Parametro":"{{FracaoDePeso}}","Entradas":[{"Nome":"Percentual","Variavel":"{{Pedagio_Percentual}}","Tipo":1}],"Condicoes":[],"ValorMinimo":null},{"TipoIncidencia":2,"CategoriaId":"c6ccd754-c1ce-4f8b-82eb-458bbb4e90c9","Descricao":"GRIS","Variavel":"{{Gris}}","TipoComponente":2,"ExpressaoValor":"{{ValorNota}} * ({{Gris_Percentual}} / 100)","ExpressaoCondicao":"","Parametro":"{{ValorNota}}","Entradas":[{"Nome":"Percentual","Variavel":"{{Gris_Percentual}}","Tipo":1}],"Condicoes":[],"ValorMinimo":null}] | 300,00          | {{FracaoDePeso}} + {{FracaoDeDistancia}} + {{Pedagio}} + {{Gris}} | 1              | []                | []                  | []             | []               | []                | 2              | 2          | true              | {"{{FracaoDePeso}}":{"{{FracaoDePeso_ValorPorFracao}}":1.25,"{{FracaoDePeso_Fracao}}":10.0},"{{FracaoDeDistancia}}":{"{{FracaoDeDistancia_ValorPorFracao}}":1.75,"{{FracaoDeDistancia_Fracao}}":25.0},"{{Pedagio}}":{"{{Pedagio_Percentual}}":1.25},"{{Gris}}":{"{{Gris_Percentual}}":0.1}} | []            |
+-> done: DataSteps.EntaoDevemHaverOsValoresNaTabela("TabelaFrete", <table>) (0,4s)
