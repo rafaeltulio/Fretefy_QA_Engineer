@@ -36,3 +36,20 @@ Implementar um teste automatizado na camada de interface a seu critério. O proj
 1. É preciso instalar o SpecFlow no Visual Studio 😉
 2. Acha que pode melhorar alguma coisa que está implementada, vá em frente 😎
 3. Tem algum conhecimento extra que gostaria de demonstrar, a hora é agora 🏆
+
+A definição da URL base a ser testada está no config do projeto:
+![image](https://github.com/christiansaddock/Fretefy_QA_Engineer/assets/12252684/73d6ac32-c2fb-476f-96f0-70f20fdceaaf)
+
+Para rodar o teste, é preciso ter o specflow instalado no projeto:
+
+![image](https://github.com/christiansaddock/Fretefy_QA_Engineer/assets/12252684/2099df15-f4d9-4304-8fd2-23b811e36da8)
+
+Depois só dar build na solução:
+
+![image](https://github.com/christiansaddock/Fretefy_QA_Engineer/assets/12252684/d7557616-aa8e-43b6-932f-7a783fd85657)
+
+E colocar para rodar os testes: 
+
+![image](https://github.com/christiansaddock/Fretefy_QA_Engineer/assets/12252684/58447970-9848-4c1d-a6c6-7d0519575ce6)
+
+Uma dica é rodar em modo de depuração(debug) após colocar um breakpoint no teste e então usar o F11 para acompanhar o passo-a-passo que o teste precisa executar até chegar no assert final ;)
