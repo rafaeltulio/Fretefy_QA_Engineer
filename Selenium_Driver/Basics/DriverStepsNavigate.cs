@@ -30,22 +30,23 @@ namespace Selenium_Driver.Basics
             }
             _driver.Url = ConfigurationManager.AppSettings["URL"] + "#/" + URL;
         }
-
-        public static void DadoAURL(string URL)
+        public static void ValidarTituloPage(string tituloPage)
         {
-            for (int i = 0; !_driver.Url.Contains(URL) && i <= 5; i++)
-            {
-                try
-                {
-                    _driver.Url = URL;
+            string atualTitulo = _driver.Title;
 
-                    return;
-                }
-                catch
-                {
-                }
+            switch (tituloPage)
+            {
+                case "Login":
+                    tituloPage = "Acesse sua conta / Fretefy";
+                    break;
+
+                default:
+                    tituloPage = "Fretefy | Transforme sua logística. Soluções em: TMS, YMS e DMS.";
+                    break;
             }
-            _driver.Url = URL;
+
+            Assert.AreEqual(atualTitulo, tituloPage);
+
         }
 
         #endregion

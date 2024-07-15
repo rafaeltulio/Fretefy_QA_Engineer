@@ -29,7 +29,7 @@ namespace Selenium_Driver.WrapperFactory
 
                 case "CHROME":
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.UseSpecCompliantProtocol = true;
+                   // chromeOptions.UseSpecCompliantProtocol = true;
                     chromeOptions.BrowserVersion = "latest";
                     chromeOptions.AddArgument("--disable-gpu");
                     chromeOptions.AddArgument("--start-maximized");

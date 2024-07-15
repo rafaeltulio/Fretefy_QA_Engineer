@@ -11,7 +11,7 @@ namespace Fretefy_Vaga.Hooks
         static NavigateSteps navSteps = new NavigateSteps();
         public static string featureAtual;
 
-        [BeforeTestRun]
+        [BeforeScenario]
         public static void AssemblyInitialize()
         {
             DriverStepsFactory.InitBrowser(ConfigurationManager.AppSettings["Browser"].ToUpper(), ConfigurationManager.AppSettings["ModoOculto"].ToUpper());
@@ -19,7 +19,7 @@ namespace Fretefy_Vaga.Hooks
             navSteps.DadoATelaAtravesDaURL(ConfigurationManager.AppSettings["URL"]);
         }
 
-        [AfterTestRun]
+        [AfterScenario]
         public static void AfterRunner()
         {
             DriverStepsFactory.CloseAllDrivers();
